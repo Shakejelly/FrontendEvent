@@ -1,0 +1,15 @@
+.swipe-menu {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 46.5px;
+    min-height: 100vh;
+    background-color: #CE9F9F;
+    transition: width 0.3s ease;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.swipe-menu.open {
+    width: 50%;
+}
