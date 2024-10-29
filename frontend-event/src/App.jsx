@@ -22,6 +22,14 @@ const buttonsConfig = [
     className: "bg-red-200 shadow-md hover:bg-red-200 hover:shadow-inner text-white",
 
   },
+  {
+    label: "Sport",
+    className: "bg-red-200 shadow-md hover:bg-red-200 hover:shadow-inner text-white",
+  },
+  {
+    label: "Music",
+    className: "bg-red-200 shadow-md hover:bg-red-200 hover:shadow-inner text-white",
+  },
 ]
 
 
