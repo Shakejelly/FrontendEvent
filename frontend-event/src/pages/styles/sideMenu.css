@@ -1,4 +1,8 @@
 .swipe-menu {
+    display: flex;                 
+    flex-direction: column;        
+    justify-content: center;       
+    align-items: center;       
     position: fixed;
     left: 0;
     top: 0;
@@ -9,7 +13,19 @@
     overflow: hidden;
     cursor: pointer;
 }
+.sidebar {
+    display: flex;                 
+    flex-direction: column;        
+    justify-content: center;       
+    align-items: center;           
+    height: 100%;                  
+}
+.sidebar button {
+    width: 99%;                   
+    margin: 12px 0;               
+    
+}
 
 .swipe-menu.open {
-    width: 50%;
+    width: 47%;
 }
