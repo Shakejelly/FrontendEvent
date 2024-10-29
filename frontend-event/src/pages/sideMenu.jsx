@@ -14,9 +14,9 @@ function SideMenuLayout() {
     return (
         <div className={`swipe-menu ${isOpen ? 'open' : ''}`} {...handlers}>
             {isOpen && (
-                <div className="row w-100">
-                    <div className="col">
-                        Column
+                <div>
+                    <div>
+
                     </div>
                 </div>
             )}
