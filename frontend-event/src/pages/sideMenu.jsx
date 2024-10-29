@@ -24,7 +24,8 @@ function SideMenuLayout({ buttons }) {
     return (
         <div className={`swipe-menu ${isOpen ? 'open' : ''}`} {...handlers}>
             {isOpen && (
-                <div className="sidebar #CE9F9F p-4 text-white h-full" onClick={e => e.stopPropagation()}>
+           <div className='sidebar'>
+                <div className="sidebar_buttons #CE9F9F p-4 text-white h-full" onClick={e => e.stopPropagation()}>
                     {buttons.map((button, index) => (
                         <button
                             key={index}
@@ -36,7 +37,13 @@ function SideMenuLayout({ buttons }) {
                         </button>
                     ))}
                 </div>
-            )}
+             
+         </div>)}
+             <div className='sidebar_settings #CE9F9F p-4 bg-red-200 shadow-[inset_0_-1px_2px_rgba(0,0,0,0.6)] hover:bg-red-200 hover:shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] text-white h-full' onClick={e => e.stopPropagation()}>
+                    <button className='sidebar_settings_button'> Settings
+                    </button>
+
+                </div>
         </div>
     );
 }

@@ -13,12 +13,20 @@
     overflow: hidden;
     cursor: pointer;
 }
-.sidebar {
+.sidebar_buttons {
     display: flex;                 
     flex-direction: column;        
     justify-content: center;       
     align-items: center;           
     height: 100%;                  
+}
+.sidebar_settings {
+    display: flex;               /* Use Flexbox for layout */
+    flex-direction: column;      /* Stack children vertically */
+    height: 100%;
+    width: 60%;
+    align-items:center;
+    
 }
 .sidebar button {
     width: 99%;                   
