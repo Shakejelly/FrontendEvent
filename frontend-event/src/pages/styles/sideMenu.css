@@ -16,23 +16,21 @@
 .sidebar{
     display: flex;
     flex-direction: column;
+    flex: 1;
     height: 100%;
     width: 100%;
     padding:10px;
 }
 .sidebar_buttons {
-    display: flex;                 
-    flex-direction: column;        
-    justify-content: center;       
+    margin: auto;
+
     align-items: center;           
     height: 100%;   
     width: 100%;               
 }
 .sidebar_settings {
-    display: flex;        
-    align-content: end;   
-    margin-bottom: auto;
-     margin-top: auto;
+    margin-top: auto;
+    align-self:flex-start;
     height: 100%;
     width: 80%;
     
@@ -41,6 +39,11 @@
     width: 99%;                   
     margin: 12px 0;               
     
+}
+.sidebar_info{
+    align-items: flex-end;
+    height: 10%;
+    width: 30%;
 }
 
 .swipe-menu.open {
