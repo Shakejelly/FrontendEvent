@@ -2,6 +2,7 @@ import './App.css'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SideMenuLayout from './pages/sideMenu';
 import EventPage from './pages/eventPage';
+import UserPage from './pages/userPage'
 
 
 const buttonsConfig = [
@@ -42,7 +43,7 @@ function App() {
         <Routes>
 
           <Route path="/" element={<EventPage />} />
-
+          <Route path="/user" element={<UserPage />} />
           <Route path="/" element={<SideMenuLayout buttons={buttonsConfig} />}>
             <Route path='/MockMenu' element={<div>Mock Menu Content</div>}></Route >
           </Route>
