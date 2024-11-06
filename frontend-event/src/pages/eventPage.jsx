@@ -15,9 +15,7 @@ const eventPage = () => {
     const fetchEvents = async () => {
         try {
 
-            const response = await fetch('/practice-events.json');
-
-            // const response = await axios.get(apiEndPoint)
+            const response = await axios.get(apiEndPoint);
 
             const data = await response.json();
 
