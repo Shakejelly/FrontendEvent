@@ -8,7 +8,7 @@
     top: 0;
     width: 50px;
     min-height: 100vh;
-    background-color: #CE9F9F;
+    background-color: #664d63;
     transition: width 0.3s ease;
     overflow: hidden;
     cursor: pointer;
@@ -28,6 +28,10 @@
     height: 100%;   
     width: 100%;               
 }
+.sidebar_footer{
+    align-items: center;
+    justify-content: space-between;
+}
 .sidebar_settings {
     margin-top: auto;
     align-self:flex-start;
@@ -41,7 +45,7 @@
     
 }
 .sidebar_info{
-    align-items: flex-end;
+    align-items: center;
     height: 10%;
     width: 30%;
 }

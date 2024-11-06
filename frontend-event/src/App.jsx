@@ -7,22 +7,16 @@ import UserPage from './pages/userPage'
 
 const buttonsConfig = [
   {
-
     label: "Home",
     className: "bg-red-200 shadow-[inset_0_-1px_2px_rgba(0,0,0,0.6)] hover:bg-red-200 hover:shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] text-white",
-
   },
   {
-
     label: "Calender",
     className: "bg-red-200 shadow-[inset_0_-1px_2px_rgba(0,0,0,0.6)] hover:bg-red-200 hover:shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] text-white",
-
   },
   {
-
     label: "Saved",
     className: "bg-red-200 shadow-[inset_0_-1px_2px_rgba(0,0,0,0.6)] hover:bg-red-200 hover:shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] text-white",
-
   },
   {
     label: "Sport",
@@ -32,7 +26,16 @@ const buttonsConfig = [
     label: "Music",
     className: "bg-red-200 shadow-[inset_0_-1px_2px_rgba(0,0,0,0.6)] hover:bg-red-200 hover:shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] text-white",
   },
-]
+];
+function MainLayout() {
+  return (
+    <div className='main-layout'>
+      <SideMenuLayout buttons={buttonsConfig} />
+      <div className='event-page-container flex-grow-1 h-0 overflow-auto'></div>
+      <EventPage />
+    </div>
+  );
+}
 
 
 function App() {
@@ -45,6 +48,9 @@ function App() {
           <Route path="/" element={<SideMenuLayout buttons={buttonsConfig} />}>
             <Route path='/MockMenu' element={<div>Mock Menu Content</div>}></Route >
           </Route>
+        <Route path="/" element={<MainLayout />} />
+        <Route path="/MockMenu" element={<div>Mock Menu Content</div>} />
+
 
         </Routes>
       </Router>
