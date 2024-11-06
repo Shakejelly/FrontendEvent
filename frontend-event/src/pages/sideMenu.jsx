@@ -52,8 +52,6 @@ function SideMenuLayout({ buttons }) {
              </div>
          </div>)}
          
-        
-
         </div>
     );
 }

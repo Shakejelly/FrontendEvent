@@ -45,9 +45,6 @@ function App() {
       <Router>
         <Routes>
 
-          <Route path="/" element={<SideMenuLayout buttons={buttonsConfig} />}>
-            <Route path='/MockMenu' element={<div>Mock Menu Content</div>}></Route >
-          </Route>
         <Route path="/" element={<MainLayout />} />
         <Route path="/MockMenu" element={<div>Mock Menu Content</div>} />
 
