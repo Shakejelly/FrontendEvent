@@ -42,8 +42,6 @@ function App() {
       <Router>
         <Routes>
 
-          <Route path="/" element={<EventPage />} />
-          <Route path="/user" element={<UserPage />} />
           <Route path="/" element={<SideMenuLayout buttons={buttonsConfig} />}>
             <Route path='/MockMenu' element={<div>Mock Menu Content</div>}></Route >
           </Route>
