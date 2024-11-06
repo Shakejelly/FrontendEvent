@@ -10,16 +10,16 @@ const eventPage = () => {
     const [hasMore, setHasMore] = useState(true); // Track if there are more events to load
     const eventsPerPage = 5;
 
-    const apiEndPoint = 'https://localhost:7261/Event/Stockholm';
+    const apiEndPoint = 'https://localhost:7261/KBEventAPI/getEvents';
 
     const fetchEvents = async () => {
         try {
 
-            const response = await fetch('/practice-events.json');
+            const response = await axios.get(apiEndPoint);
 
             // const response = await axios.get(apiEndPoint)
 
-            const data = await response.json();
+            const data = await response.data
 
             const newEvents = data.slice((page - 1) * eventsPerPage, page * eventsPerPage)
 
@@ -60,7 +60,7 @@ const eventPage = () => {
             <main className='min-h-screen bg-DarkPurple flex justify-center'>
                 <div className='flex-col align-middle ml-5 justify-evenly content-evenly'>
                     {events.map(event => (
-                        <EventCard key={event.id} event={event} />
+                        <EventCard key={event.eventId} event={event} />
                     ))}
                     {loading && <div>Loading...</div>}
                 </div>

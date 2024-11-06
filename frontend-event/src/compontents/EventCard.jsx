@@ -4,14 +4,16 @@ import EventDetailsPopup from './EventDetailsPopup';
 const EventCard = ({ event }) => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-    const formattedDate = new Date(event.eventDate).toLocaleString('sv-SE', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: 'false',
-    });
+    const dateDisplay = event.dates.length > 1
+        ? "Flera Datum"
+        : new Date(event.dates[0]).toLocaleString('sv-SE', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: '2-digit',
+            hour12: false,
+        });
 
     const handleDetailsClick = () => {
         setIsPopupOpen(true);
@@ -27,9 +29,9 @@ const EventCard = ({ event }) => {
                 <img className="rounded-t-lg object-cover" src={event.imageUrl} alt="" />
             </a>
             <div className="p-5">
-                <p className="mb-3 font-normal text-black-700 dark:text-black-400">{formattedDate}</p>
+                <p className="mb-3 font-normal text-black-700 dark:text-black-400">{dateDisplay}</p>
                 <a href="#">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{event.eventName}</h5>
+                    <h6 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{event.title}</h6>
                 </a>
                 <button onClick={handleDetailsClick} href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-DarkPurple rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:purpleContrast dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Detaljer
