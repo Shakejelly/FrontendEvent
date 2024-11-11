@@ -1,8 +1,9 @@
 import './App.css'
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 import SideMenuLayout from './pages/sideMenu';
 import EventPage from './pages/eventPage';
 import UserPage from './pages/userPage'
+
 
 
 const buttonsConfig = [
@@ -32,7 +33,7 @@ function MainLayout() {
     <div className='main-layout'>
       <SideMenuLayout buttons={buttonsConfig} />
       <div className='event-page-container flex-grow-1 h-0 overflow-auto'></div>
-      <EventPage />
+      <Outlet />
     </div>
   );
 }
@@ -45,8 +46,12 @@ function App() {
       <Router>
         <Routes>
 
-        <Route path="/" element={<MainLayout />} />
-        <Route path="/MockMenu" element={<div>Mock Menu Content</div>} />
+          <Route path="/" element={<MainLayout />}>
+            <Route path="/user" element={<UserPage />} />
+            <Route path="/MockMenu" element={<div>Mock Menu Content</div>} />
+            <Route path="/events" element={<EventPage />} />
+          </Route>
+
 
 
         </Routes>

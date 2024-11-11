@@ -1,18 +1,70 @@
 import React from 'react';
+import './style/EventCard.css'
+import { htmlToText } from 'html-to-text'
 
 const EventDetailsPopup = ({ event, onClose }) => {
+
+    const eventDescription = htmlToText(event.description)
+
+    const currentDate = new Date();
+
+    const upcomingDates = event.dates.filter(date => new Date(date) >= currentDate)
+
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-flesh bg-opacity-50">
-            <div className="bg-white p-5 rounded-lg max-w-md">
-                <h2 className="text-xl font-bold">{event.eventName}</h2>
-                <p><strong>Date:</strong> {new Date(event.eventDate).toLocaleString('sv-SE')}</p>
-                <p><strong>Stad:</strong> {event.city}</p>
-                <p><strong>Adress:</strong> {event.address}</p>
-                <a href={event.ticketPurchaseUrl} onClick={onClose} className="mt-3 mr-5 bg-DarkPurple text-white px-4 py-2 rounded">Biljetter</a>
+        <div className="fixed inset-0 flex-col items-center content-center justify-center align-middle bg-flesh bg-opacity-50 transition-opacity duration-300 ease-out opacity-0 animate-fadeIn max-h-screen overflow-y-auto">
+            <a href="#">
+                <img className="rounded-t-lg object-cover" src={event.imageUrl} alt="" />
+            </a>
+            <div className="bg-gray-300 p-5 rounded-lg max-w-lg overflow-y-auto max-h-screen">
+                <h2 className="text-xl font-bold">{event.title}</h2>
+                <div className="dates-container">
+                    {/* Display multiple dates if they exist, or a single date */}
+                    <p><strong>Datum:</strong></p>
+                    {event.dates.length > 1 ? (
+                        <ul className="max-h-24 overflow-y-auto">
+                            {upcomingDates.map((date, index) => (
+                                <li key={index} className="text-sm">
+                                    {new Date(date).toLocaleString('sv-SE', {
+                                        year: 'numeric',
+                                        month: 'long',
+                                        day: 'numeric',
+                                        hour: 'numeric',
+                                        minute: '2-digit',
+                                        hour12: false,
+                                    })}
+                                </li>
+                            ))}
+                        </ul>
+
+                    ) : (
+                        <p>{new Date(upcomingDates[0]).toLocaleString('sv-SE', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                            hour: 'numeric',
+                            minute: '2-digit',
+                            hour12: false,
+                        })}</p>
+                    )}
+                    {/* <div class="absolute right-0 top-1/2 transform -translate-y-1/2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8.009 8.009 0 0 1-8 8z" /><path d="M13 13.586V8h-2v5.586l-2.293-2.293-1.414 1.414L12 17.414l4.707-4.707-1.414-1.414L13 13.586z" /></svg>
+                    </div> */}
+                </div>
+
+
+                <div className="max-h-screen mb-3"> <p className="mt-1"><strong>Beskrivning:</strong> {eventDescription}</p></div>
+
+
+                <p><strong>Adress:</strong> {event.venue.address}, {event.venue.city}</p>
+                <p><strong>Pris från:</strong> {event.lowestPrice !== 0 ? event.lowestPrice : event.highestPrice}:-</p>
+                <a href={event.eventUrlPage} onClick={onClose} className="mt-3 mr-5 bg-DarkPurple text-white px-4 py-2 rounded">
+                    Biljetter
+                </a>
                 <button onClick={onClose} className="mt-3 bg-DarkPurple text-white px-4 py-2 rounded">Close</button>
             </div>
         </div>
     );
+
 };
 
 export default EventDetailsPopup;
