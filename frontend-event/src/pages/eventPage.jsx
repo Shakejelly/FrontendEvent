@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import EventCard from '../compontents/EventCard';
+import EventCard from '../components/EventCard';
 
 const EventPage = () => {
     const [events, setEvents] = useState([]);

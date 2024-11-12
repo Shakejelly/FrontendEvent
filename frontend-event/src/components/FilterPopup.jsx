@@ -1,0 +1,11 @@
+import React from 'react'
+
+const FilterPopup = () => {
+  return (
+    <div className="">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10,10,4,2H20l-6,8V22H10Z" /></svg>
+    </div>
+  )
+}
+
+export default FilterPopup

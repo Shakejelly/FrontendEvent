@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom
 import SideMenuLayout from './pages/sideMenu';
 import EventPage from './pages/eventPage';
 import UserPage from './pages/userPage'
+import Filter from './components/FilterPopup'
 
 
 
@@ -50,6 +51,7 @@ function App() {
             <Route path="/user" element={<UserPage />} />
             <Route path="/MockMenu" element={<div>Mock Menu Content</div>} />
             <Route path="/events" element={<EventPage />} />
+            <Route path='/filter' element={<Filter />} />
           </Route>
 
 

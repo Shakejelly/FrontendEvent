@@ -1,5 +1,5 @@
 import React from 'react'
-import UserCard from '../compontents/UserCard'
+import UserCard from '../components/UserCard'
 
 const userPage = () => {
     return (
