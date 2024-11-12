@@ -8,35 +8,42 @@ const EventPage = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [page, setPage] = useState(1);
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
     const eventsPerPage = 10;
-    const KbEventsEndpoint = 'https://localhost:7261/KBEventAPI/getEvents'; // API endpoint URL
+    const KbEventsEndpoint = 'https://localhost:7261/KBEventAPI/getEvents';
     const ticketMasterEndpoint = 'https://localhost:7261/TicketMasterAPI/getEvents';
     const visitStockholmEndpoint = 'https://localhost:7261/VisitStockholmAPI/getEvents';
     const CACHE_EXPIRATION_TIME = 3600000; // Cache duration in milliseconds (1 hour)
 
-    // Initial load: Check local cache
     useEffect(() => {
         const cachedEvents = localStorage.getItem('events');
         const cacheTimeStamp = localStorage.getItem('cacheTimestamp');
         const currentTime = Date.now();
 
         if (cachedEvents && cacheTimeStamp && (currentTime - cacheTimeStamp) < CACHE_EXPIRATION_TIME) {
-
-            const parsedEvents = JSON.parse(cachedEvents)
+            const parsedEvents = JSON.parse(cachedEvents);
             setEvents(parsedEvents);
             setDisplayedEvents(parsedEvents.slice(0, eventsPerPage));
             setLoading(false);
         } else {
-            fetchEvents();  // Start with page 1
+            fetchEvents();  // Start with page 1 if cache is missing or expired
         }
     }, []);
+
+    const handleOpenPopup = () => {
+        localStorage.setItem('scrollPosition', window.scrollY);
+        setIsPopupOpen(true);
+    };
+
+    const handleClosePopup = () => {
+        setIsPopupOpen(false);
+    };
 
     // Fetch events and store in cache
     const fetchEvents = async () => {
         try {
-            setLoading(true);  // Start loading
+            setLoading(true);
 
-            // Make API request
             const response = await axios.get(KbEventsEndpoint);
             const response2 = await axios.get(ticketMasterEndpoint);
             const response3 = await axios.get(visitStockholmEndpoint);
@@ -50,16 +57,14 @@ const EventPage = () => {
             setEvents(allEvents);
             setDisplayedEvents(allEvents.slice(0, eventsPerPage));
 
-
-
             localStorage.setItem('events', JSON.stringify(allEvents));
             localStorage.setItem('cacheTimestamp', Date.now().toString());
 
         } catch (error) {
             console.error('Error fetching events:', error);
-            setError(error);  // Set error if fetching fails
+            setError(error);
         } finally {
-            setLoading(false);  // Stop loading when done
+            setLoading(false);
         }
     };
 
@@ -68,7 +73,7 @@ const EventPage = () => {
         const newEvents = events.slice(0, nextPage * eventsPerPage);
         setDisplayedEvents(newEvents);
         setPage(nextPage);
-    }
+    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -81,26 +86,20 @@ const EventPage = () => {
             }
         };
 
-        window.addEventListener('scroll', handleScroll)
+        window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, [loading, displayedEvents]);
 
     return (
         <>
             <main className="min-h-screen bg-DarkPurple flex justify-center">
-                <div className="flex-col align-middle ml-20 justify-evenly content-evenly">
-                    {/* Render each event in an EventCard component */}
+                <div className="flex-col align-middle justify-evenly content-evenly">
                     {displayedEvents.map((event) => (
                         <EventCard key={event.eventId} event={event} />
                     ))}
 
-                    {/* Show loading indicator */}
                     {loading && <div>Loading...</div>}
-
-                    {/* Show error message if error occurred */}
                     {error && <div>Error loading events: {error.message}</div>}
-
-
                 </div>
             </main>
         </>

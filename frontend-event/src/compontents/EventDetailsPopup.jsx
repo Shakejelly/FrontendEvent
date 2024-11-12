@@ -1,4 +1,4 @@
-import React from 'react';
+import { React } from 'react';
 import './style/EventCard.css'
 import { htmlToText } from 'html-to-text'
 
@@ -9,6 +9,10 @@ const EventDetailsPopup = ({ event, onClose }) => {
     const currentDate = new Date();
 
     const upcomingDates = event.dates.filter(date => new Date(date) >= currentDate)
+
+    const handleRedirect = (url) => {
+        window.open(url);
+    }
 
     return (
         <div className="fixed inset-0 flex-col items-center content-center justify-center align-middle bg-flesh bg-opacity-50 transition-opacity duration-300 ease-out opacity-0 animate-fadeIn max-h-screen overflow-y-auto">
@@ -46,9 +50,7 @@ const EventDetailsPopup = ({ event, onClose }) => {
                             hour12: false,
                         })}</p>
                     )}
-                    {/* <div class="absolute right-0 top-1/2 transform -translate-y-1/2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8.009 8.009 0 0 1-8 8z" /><path d="M13 13.586V8h-2v5.586l-2.293-2.293-1.414 1.414L12 17.414l4.707-4.707-1.414-1.414L13 13.586z" /></svg>
-                    </div> */}
+
                 </div>
 
 
@@ -57,7 +59,7 @@ const EventDetailsPopup = ({ event, onClose }) => {
 
                 <p><strong>Adress:</strong> {event.venue.address}, {event.venue.city}</p>
                 <p><strong>Pris från:</strong> {event.lowestPrice !== 0 ? event.lowestPrice : event.highestPrice}:-</p>
-                <a href={event.eventUrlPage} onClick={onClose} className="mt-3 mr-5 bg-DarkPurple text-white px-4 py-2 rounded">
+                <a onClick={() => handleRedirect(event.eventUrlPage)} className="mt-3 mr-5 bg-DarkPurple text-white px-4 py-2 rounded">
                     Biljetter
                 </a>
                 <button onClick={onClose} className="mt-3 bg-DarkPurple text-white px-4 py-2 rounded">Close</button>

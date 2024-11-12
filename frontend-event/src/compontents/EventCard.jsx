@@ -36,7 +36,7 @@ const EventCard = ({ event }) => {
     };
 
     return (
-        <div className="max-w-xs my-5 flex-col bg-Flesh border border-gray-200 rounded-lg shadow dark:purpleDark dark:border-gray-700">
+        <div className="max-w-xs my-5 flex-col bg-Flesh border border-gray-200 rounded-lg shadow dark:purpleDark dark:border-gray-700 ml-16">
             <a href="#">
                 <img className="rounded-t-lg object-cover" src={event.imageUrl} alt="" />
             </a>
