@@ -2,7 +2,7 @@ import './App.css'
 import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 import SideMenuLayout from './pages/SideMenu';
 import EventPage from './pages/EventPage';
-import UserPage from './pages/UserPage'
+import UserPage from './pages/UserPage';
 import Filter from './components/FilterPopup'
 
 
