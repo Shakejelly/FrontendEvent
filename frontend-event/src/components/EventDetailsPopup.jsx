@@ -55,7 +55,7 @@ const EventDetailsPopup = ({ event, onClose }) => {
                 </div>
 
 
-                <div className="max-h-screen mb-3"> <p className="mt-1"><strong>Beskrivning:</strong> {eventDescription}</p></div>
+                <div className="max-h-screen mb-3 "> <p className="mt-1"><strong>Beskrivning:</strong> {eventDescription}</p></div>
 
 
                 <p><strong>Adress:</strong> {event.venue.address}, {event.venue.city}</p>

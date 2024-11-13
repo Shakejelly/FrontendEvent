@@ -87,7 +87,7 @@ const EventPage = () => {
 
             <main className="bg-DarkPurple">
                 <FilterPopup />
-                <div className="min-h-screen ml-4 pt-10 bg-DarkPurple flex flex-col align-middle justify-evenly content-evenly">
+                <div className="min-h-screen pt-10 bg-DarkPurple flex flex-col align-middle justify-evenly content-evenly">
                     {displayedEvents.map((event) => (
                         <EventCard key={event.eventId} event={event} />
                     ))}
