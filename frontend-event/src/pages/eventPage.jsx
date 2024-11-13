@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import EventCard from '../components/EventCard';
+import FilterPopup from '../components/FilterPopup';
 
 const EventPage = () => {
     const [events, setEvents] = useState([]);
@@ -8,7 +9,7 @@ const EventPage = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [page, setPage] = useState(1);
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
+
     const eventsPerPage = 10;
     const KbEventsEndpoint = 'https://localhost:7261/KBEventAPI/getEvents';
     const ticketMasterEndpoint = 'https://localhost:7261/TicketMasterAPI/getEvents';
@@ -29,15 +30,6 @@ const EventPage = () => {
             fetchEvents();  // Start with page 1 if cache is missing or expired
         }
     }, []);
-
-    const handleOpenPopup = () => {
-        localStorage.setItem('scrollPosition', window.scrollY);
-        setIsPopupOpen(true);
-    };
-
-    const handleClosePopup = () => {
-        setIsPopupOpen(false);
-    };
 
     // Fetch events and store in cache
     const fetchEvents = async () => {
@@ -92,8 +84,10 @@ const EventPage = () => {
 
     return (
         <>
-            <main className="min-h-screen bg-DarkPurple flex justify-center">
-                <div className="flex-col align-middle justify-evenly content-evenly">
+
+            <main className="bg-DarkPurple">
+                <FilterPopup />
+                <div className="min-h-screen ml-4 pt-10 bg-DarkPurple flex flex-col align-middle justify-evenly content-evenly">
                     {displayedEvents.map((event) => (
                         <EventCard key={event.eventId} event={event} />
                     ))}

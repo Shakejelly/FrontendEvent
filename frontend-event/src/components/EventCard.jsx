@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import EventDetailsPopup from './EventDetailsPopup';
 
 const EventCard = ({ event }) => {
@@ -26,6 +26,19 @@ const EventCard = ({ event }) => {
             hour12: false,
         });
 
+    useEffect(() => {
+        if (isPopupOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+
+        // Clean up on component unmount
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [isPopupOpen]); // Add isPopupOpen as a dependency
+
 
     const handleDetailsClick = () => {
         setIsPopupOpen(true);
@@ -36,11 +49,11 @@ const EventCard = ({ event }) => {
     };
 
     return (
-        <div className="max-w-xs my-5 flex-col bg-Flesh border border-gray-200 rounded-lg shadow dark:purpleDark dark:border-gray-700 ml-16">
+        <div className="my-5 flex-col w-4/5  bg-Flesh border border-gray-200 rounded-lg shadow dark:purpleDark dark:border-gray-700 ml-16">
             <a href="#">
-                <img className="rounded-t-lg object-cover" src={event.imageUrl} alt="" />
+                <img className="rounded-t-lg object-cover w-full" src={event.imageUrl} alt="" />
             </a>
-            <div className="p-5">
+            <div className="p-5 ">
                 <p className="mb-3 font-normal text-black-700 dark:text-black-400">{dateDisplay}</p>
                 <a href="#">
                     <h6 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{event.title}</h6>
