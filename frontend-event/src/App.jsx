@@ -5,6 +5,7 @@ import EventPage from './pages/EventPage';
 import UserPage from './pages/UserPage';
 import Filter from './components/FilterPopup'
 import FriendsAll from './components/FriendsAll';
+import EditProfile from './components/EditProfile';
 
 
 
@@ -54,6 +55,7 @@ function App() {
             <Route path="/events" element={<EventPage />} />
             <Route path='/filter' element={<Filter />} />
             <Route path='/allfriends' element={<FriendsAll />} />
+            <Route path='/editprofile' element={<EditProfile />} />
           </Route>
 
 

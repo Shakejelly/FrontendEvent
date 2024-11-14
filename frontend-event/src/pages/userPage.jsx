@@ -3,10 +3,12 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import UserCard from '../components/UserCard'
 import FriendBox from '../components/FriendBox';
+import { Link, useNavigate } from 'react-router-dom';
 
 const UserPage = () => {
     const [user, setUser] = useState(null);
     const [friends, setFriends] = useState([]);
+    const navigate = useNavigate();
     const userId = "73f663e9-f16b-4503-988a-461318f3ebca";
     useEffect(() => {
         const getUser = async () => {
@@ -27,6 +29,11 @@ const UserPage = () => {
         getUser();
     }, [])
 
+    // function with 'navigate' for editProfile to send userId as prop
+    const HandleEditProfile = () => {
+        navigate('/editprofile', { state: { userId } })
+    }
+
     return (
         <>
             <div className='userPage min-h-screen bg-DarkPurple flex justify-center item-center'>
@@ -42,12 +49,14 @@ const UserPage = () => {
                     }
                     <h5 className='text-center'>{user ? `${user.firstName} ${user.lastName}` : "Guest"}</h5>
 
-                    {/* friendsBox */}
+                    {/* friendsBox component */}
                     <FriendBox friends={friends} />
 
                     {/* edit profile section */}
                     <div>
-                        <button className="bg-red-200 text-black w-full py-4 px-4 rounded shadow-inner hover:bg-red-300 hover:shadow-md">
+                        <button
+                            onClick={HandleEditProfile}
+                            className="bg-red-200 text-black w-full py-4 px-4 rounded shadow-inner hover:bg-red-300 hover:shadow-md">
                             Edit profile
                         </button>
                     </div>

@@ -18,7 +18,7 @@ const FriendBox = ({ friends }) => {
 
                     {/*Show all friends button*/}
                     <div>
-                        <Link to="/allfriends" className='hover:text-white' state={friends}>
+                        <Link to="/allfriends" state={friends} className='hover:text-white'>
                             Show All
                         </Link>
                     </div>
