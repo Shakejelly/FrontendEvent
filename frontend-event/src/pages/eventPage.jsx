@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import EventCard from '../components/EventCard';
 import FilterPopup from '../components/FilterPopup';
+import SearchBar from '../components/SearchBar'
 
 const EventPage = () => {
     const [events, setEvents] = useState([]);
@@ -84,9 +85,11 @@ const EventPage = () => {
 
     return (
         <>
-
             <main className="bg-DarkPurple">
-                <FilterPopup />
+                <div className="-z-20">
+                    <SearchBar />
+                    <FilterPopup />
+                </div>
                 <div className="min-h-screen pt-10 bg-DarkPurple flex flex-col align-middle justify-evenly content-evenly">
                     {displayedEvents.map((event) => (
                         <EventCard key={event.eventId} event={event} />

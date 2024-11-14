@@ -39,6 +39,9 @@ const FilterPopup = () => {
           <label className="block text-white">
             <input type="radio" name="sort" value="newest" /> Senaste
           </label>
+          <label className="block text-white">
+            <input type="radio" name="sort" value="oldest" /> Äldst
+          </label>
         </div>
       </div>
     </div>
