@@ -4,6 +4,7 @@ import SideMenuLayout from './pages/SideMenu';
 import EventPage from './pages/EventPage';
 import UserPage from './pages/UserPage';
 import Filter from './components/FilterPopup'
+import FriendsAll from './components/FriendsAll';
 
 
 
@@ -52,6 +53,7 @@ function App() {
             <Route path="/MockMenu" element={<div>Mock Menu Content</div>} />
             <Route path="/events" element={<EventPage />} />
             <Route path='/filter' element={<Filter />} />
+            <Route path='/allfriends' element={<FriendsAll />} />
           </Route>
 
 
