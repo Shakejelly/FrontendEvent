@@ -6,10 +6,11 @@ import { Link } from 'react-router-dom'
 const EditProfile = () => {
     const location = useLocation();
     const userId = location.state?.userId;
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [nickName, setNickName] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
+    const userData = location.state?.userData;
+    const [firstName, setFirstName] = useState(userData?.firstName || "");
+    const [lastName, setLastName] = useState(userData?.lastName || "");
+    const [nickName, setNickName] = useState(userData?.nickName || "");
+    const [phoneNumber, setPhoneNumber] = useState(userData?.phoneNumber || "");
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
 

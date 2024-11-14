@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import UserCard from '../components/UserCard'
 import FriendBox from '../components/FriendBox';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const UserPage = () => {
     const [user, setUser] = useState(null);
@@ -31,7 +31,7 @@ const UserPage = () => {
 
     // function with 'navigate' for editProfile to send userId as prop
     const HandleEditProfile = () => {
-        navigate('/editprofile', { state: { userId } })
+        navigate('/editprofile', { state: { userId, userData: user } })
     }
 
     return (
