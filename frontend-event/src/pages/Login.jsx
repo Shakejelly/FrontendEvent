@@ -39,31 +39,68 @@ const Login = () => {
   const handleForgotPasswordView = () => setView("forgotPassword");
 
   return (
-    <div>
+    <div className="flex items-center justify-center min-h-screen bg-DarkPurple">
       {view === "login" && (
-        <form onSubmit={handleSubmit}>
-          <h2>Login</h2>
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <button type="submit" disabled={isLoading}>
-            {isLoading ? "Logging in..." : "Login"}
+        <form
+          onSubmit={handleSubmit}
+          className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg"
+        >
+          <h2 className="mb-6 text-3xl font-bold text-center text-[#CE9F9F]">
+            Login
+          </h2>
+          <div className="mb-4">
+            <input
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-DarkPurple"
+            />
+          </div>
+          <div className="mb-6">
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-DarkPurple"
+            />
+          </div>
+          <button
+            type="submit"
+            disabled={isLoading}
+            className={`w-full py-2 mb-4 text-white rounded-lg ${
+              isLoading ? "bg-gray-400" : "bg-[#CE9F9F] hover:bg-opacity-90"
+            }`}
+          >
+            {isLoading ? "Loggar in..." : "Login"}
           </button>
-          {error && <p>{error}</p>}
-          <button onClick={handleRegisterView}>Register</button>
-          <button onClick={handleForgotPasswordView}>Forgot Password</button>
-          <button onClick={handleGoogleLogin}>Login with Google</button>
+          {error && <p className="mb-4 text-center text-[#CE9F9F]">{error}</p>}
+          <div className="flex justify-between mb-4 text-sm">
+            <button
+              type="button"
+              onClick={handleRegisterView}
+              className="text-DarkPurple hover:underline"
+            >
+              Register
+            </button>
+            <button
+              type="button"
+              onClick={handleForgotPasswordView}
+              className="text-DarkPurple hover:underline"
+            >
+              Forgot Password
+            </button>
+          </div>
+          <button
+            type="button"
+            onClick={handleGoogleLogin}
+            className="w-full px-4 py-2 text-DarkPurple border border-DarkPurple rounded-lg hover:bg-DarkPurple hover:text-white"
+          >
+            Login with Google
+          </button>
         </form>
       )}
 
