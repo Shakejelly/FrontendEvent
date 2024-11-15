@@ -16,7 +16,7 @@ const EventDetailsPopup = ({ event, onClose }) => {
     }
 
     return (
-        <div className="fixed inset-0 flex-col items-center content-center justify-center align-middle bg-flesh bg-opacity-50 transition-opacity duration-300 ease-out opacity-0 animate-fadeIn max-h-screen overflow-y-auto">
+        <div className="fixed z-30 inset-0 flex-col items-center content-center justify-center align-middle bg-flesh bg-opacity-50 transition-opacity duration-300 ease-out opacity-0 animate-fadeIn max-h-screen overflow-y-auto">
             <a href="#">
                 <img className="rounded-t-lg object-cover w-full" src={event.imageUrl} alt="" />
             </a>
