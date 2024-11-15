@@ -23,13 +23,11 @@ function SideMenuLayout({ buttons }) {
     });
 
     return (
-        <div className={`swipe-menu border-r-2 border-solid border-gray-800  ${isOpen ? 'open' : ''}`} {...handlers}>
+        <div className={`swipe-menu border-r-2 border-solid border-gray-800 z-20  ${isOpen ? 'open' : ''}`} {...handlers}>
             {isOpen && (
                 <div className='sidebar'>
                     <div className='sidebar_userName #CE9F9F font-extrabold text-black text-5xl hover:shadow-xl h-full' onClick={e => e.stopPropagation()}>
-                        <Link to="/user">
-                            <button>User</button>
-                        </Link>
+                        <button>User</button>
                     </div>
                     <div className="sidebar_buttons #CE9F9F p-4 text-black h-full" onClick={e => e.stopPropagation()}>
                         {buttons.map((button, index) => (
