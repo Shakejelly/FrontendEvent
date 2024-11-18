@@ -4,6 +4,7 @@ import axios from 'axios';
 import UserCard from '../components/UserCard'
 import FriendBox from '../components/FriendBox';
 import { useNavigate } from 'react-router-dom';
+import FavoriteBox from '../components/FavoriteBox';
 
 const UserPage = () => {
     const [user, setUser] = useState(null);
@@ -41,7 +42,6 @@ const UserPage = () => {
                 {/* container for welcome,profPic, friendContainer */}
                 <div className="flex flex-col justify-top items-center mt-4 space-y-4">
 
-
                     {user && user.profilePictureUrl ?
                         (<img src={user.profilePictureUrl} alt="ProfilePicture" className="rounded-full w-20 h-20" />)
                         :
@@ -49,17 +49,22 @@ const UserPage = () => {
                     }
                     <h5 className='text-center'>{user ? `${user.firstName} ${user.lastName}` : "Guest"}</h5>
 
-                    {/* friendsBox component */}
-                    <FriendBox friends={friends} />
-
                     {/* edit profile section */}
                     <div>
                         <button
                             onClick={HandleEditProfile}
-                            className="bg-red-200 text-black w-full py-4 px-4 rounded shadow-inner hover:bg-red-300 hover:shadow-md">
+                            className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-Flesh 
+                            rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:purpleContrast 
+                            dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-1">
                             Edit profile
                         </button>
                     </div>
+
+                    {/* friendsBox component */}
+                    <FriendBox friends={friends} />
+
+                    {/* favorite Box component */}
+                    <FavoriteBox id={userId} />
                 </div>
 
                 {/* h

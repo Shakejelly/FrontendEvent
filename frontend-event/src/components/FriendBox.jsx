@@ -6,7 +6,7 @@ const FriendBox = ({ friends }) => {
     return (
         <>
             {/* friend container */}
-            <div className="bg-DarkPurple shadow-lg rounded-lg p-6 max-w-md mx-auto mt-8">
+            <div className="bg-Flesh shadow-lg rounded-lg p-6 max-w-md mx-auto mt-8">
 
                 {/* container for numberofFriends and showAll button */}
                 <div className='flex flex-row justify-between'>
@@ -30,7 +30,7 @@ const FriendBox = ({ friends }) => {
                     {friends.slice(0, 4).map((friend, index) => (
 
                         // a div (card) that will be created for every user-object 
-                        <div key={index} className='bg-DarkPurple shadow-md hover:scale-105 rounded-lg p-5 max-w-md mx-auto m-1'>
+                        <div key={index} className='bg-DarkPurple shadow-md hover:scale-105 rounded-lg p-5 w-[8rem] h-[8rem] mx-auto m-1'>
 
                             {/* div for friends profileImage. */}
                             <div className='flex justify-center'>
@@ -38,8 +38,8 @@ const FriendBox = ({ friends }) => {
                             </div>
 
                             {/* div for friends name */}
-                            <div>
-                                <p className='break-words flex'>{friend.firstName} {friend.lastName} </p>
+                            <div className='flex justify-center pt-1 text-white'>
+                                <p className='break-words text-center'>{friend.firstName} {friend.lastName}</p>
                             </div>
                         </div>
 

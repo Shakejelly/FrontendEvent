@@ -42,38 +42,43 @@ const EditProfile = () => {
 
                     {/* <div><Link to="/user" className='shadow hover:text-white'>Back</Link></div> */}
 
-                    <form className='flex flex-col'>
-                        <label htmlFor="firstName">First name </label>
-                        <input
+                    <form className="flex flex-col space-y-2 max-w-lg mx-auto p-5 bg-white shadow-lg rounded-lg">
+
+                        <label htmlFor="firstName" className="text-m font-medium text-gray-800">First name </label>
+                        <input className="bg-Flesh p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-DarkPurple focus:border-DarkPurple w-full"
                             onChange={(e) => setFirstName(e.target.value)}
                             value={firstName} type="text" id='firstName' required
                         />
 
-                        <label htmlFor="lastName">Last name </label>
-                        <input
+                        <label htmlFor="lastName" className="text-m font-medium text-gray-800">Last name </label>
+                        <input className="bg-Flesh p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-DarkPurple focus:border-DarkPurple w-full"
                             onChange={(e) => setLastName(e.target.value)}
                             value={lastName} type="text" id='lastName' required
                         />
 
-                        <label htmlFor="nickName">Nickname </label>
-                        <input
+                        <label htmlFor="nickName" className="text-m font-medium text-gray-800">Nickname </label>
+                        <input className="bg-Flesh p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-DarkPurple focus:border-DarkPurple w-full"
                             onChange={(e) => setNickName(e.target.value)}
                             value={nickName} type="text" id='nickName' required
                         />
 
 
-                        <label htmlFor="phoneNumber">Phone number </label>
-                        <input
+                        <label htmlFor="phoneNumber" className="text-m font-medium text-gray-800">Phone number </label>
+                        <input className="bg-Flesh p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-DarkPurple focus:border-DarkPurple w-full"
                             onChange={(e) => setPhoneNumber(e.target.value)}
                             value={phoneNumber} type="text" id='phoneNumber' required
                         />
                         <div className='flex items-center justify-between'>
-                            <div className='border m-2 rounded hover:scale-95 w-[4rem] text-center'>
+                            <div className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-Flesh 
+                            rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:purpleContrast 
+                            dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-2">
                                 <Link to="/user">
                                     Back
                                 </Link>
                             </div>
-                            <div className='border m-2 rounded hover:scale-95 w-[4rem] text-center'>
+                            <div className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-Flesh 
+                            rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:purpleContrast 
+                            dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-2">
                                 <button
                                     onClick={updateProfileInfo}>
                                     Save
@@ -82,7 +87,12 @@ const EditProfile = () => {
                         </div>
 
                     </form>
-                    {successMessage && <div className="border-2 rounded bg-green-500">{successMessage}</div>}
+                    {successMessage && (
+                        <div className="border-1 bg-green-500 text-white text-m font-medium p-4 rounded-lg shadow-xs max-w-lg mx-auto">
+                            {successMessage}
+                        </div>
+                    )}
+
                 </div >
             </div >
         </>
