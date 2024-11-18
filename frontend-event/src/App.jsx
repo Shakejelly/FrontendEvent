@@ -6,6 +6,7 @@ import UserPage from './pages/UserPage';
 import Filter from './components/FilterPopup'
 import FriendsAll from './components/FriendsAll';
 import EditProfile from './components/EditProfile';
+import LandingPage from './pages/landingPage';
 
 
 
@@ -48,7 +49,7 @@ function App() {
     <>
       <Router>
         <Routes>
-
+          <Route path="/home" element={<LandingPage />}></Route>
           <Route path="/" element={<MainLayout />}>
             <Route path="/user" element={<UserPage />} />
             <Route path="/MockMenu" element={<div>Mock Menu Content</div>} />

@@ -47,7 +47,7 @@ const EventCard = ({ event, onFavoriteToggle }) => {
 
 
     const handleDetailsClick = () => {
-        console.log('Details clicked for', event.title, 'with ID:', event.eventId, event.lowestPrice);
+        console.log('Details clicked for', event.title, 'with ID:', event.eventId, event.lowestPrice, event);
         setIsPopupOpen(true);
     };
 
