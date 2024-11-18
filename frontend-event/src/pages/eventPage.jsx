@@ -99,6 +99,10 @@ const EventPage = () => {
     // Handle page change in ReactPaginate
     const handlePageChange = ({ selected }) => {
         setPage(selected + 1); // ReactPaginate uses 0-based indexing, so add 1
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth', // Enables smooth scrolling
+        });
     };
 
     // Paginate the events based on the current page
@@ -109,11 +113,15 @@ const EventPage = () => {
     }, [page, events]);
 
     return (
+
         <main className="bg-DarkPurple">
+
             <div className="-z-20">
                 <ChooseDateButton onDateSelect={handleDateSelect} />
             </div>
+
             <div className="min-h-screen pt-10 bg-DarkPurple flex flex-col align-middle justify-evenly content-evenly">
+
                 {displayedEvents.map((event) => (
                     <EventCard key={event.eventId} event={event} />
                 ))}
@@ -126,16 +134,16 @@ const EventPage = () => {
                 {/* Pagination Controls */}
                 <ReactPaginate
                     pageCount={Math.ceil(events.length / eventsPerPage)} // Total number of pages
-                    pageRangeDisplayed={5} // Number of pages to show in pagination
+                    pageRangeDisplayed={3} // Number of pages to show in pagination
                     marginPagesDisplayed={2} // Number of pages to show on either side of the current page
                     onPageChange={handlePageChange}
-                    pageClassName="px-1"
-                    containerClassName="pagination flex justify-center my-8 border-black ml-8 "
-                    activeClassName="bg-blue-500 text-white rounded-lg"
-                    previousLabel="Previous"
+                    pageClassName="px-1 mx-1 border-2 rounded-lg "
+                    containerClassName="pagination flex justify-center my-8 border-black ml-10 bg-white py-2 text-xl "
+                    activeClassName="bg-DarkPurple text-white rounded-lg"
+                    previousLabel="Previous "
                     nextLabel="Next"
-                    previousClassName="pr-2"
-                    nextClassName='pl-2'
+                    previousClassName="px-1 border-2 rounded-lg"
+                    nextClassName='px-1 border-2 rounded-lg'
                 />
             </div>
         </main>
