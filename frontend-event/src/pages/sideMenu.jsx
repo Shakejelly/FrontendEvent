@@ -27,7 +27,9 @@ function SideMenuLayout({ buttons }) {
             {isOpen && (
                 <div className='sidebar'>
                     <div className='sidebar_userName #CE9F9F font-extrabold text-black text-5xl hover:shadow-xl h-full' onClick={e => e.stopPropagation()}>
-                        <button>User</button>
+                        <button><Link to="/user" className='hover:text-white'>
+                            User
+                        </Link></button>
                     </div>
                     <div className="sidebar_buttons #CE9F9F p-4 text-black h-full" onClick={e => e.stopPropagation()}>
                         {buttons.map((button, index) => (
