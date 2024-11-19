@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Register from "./Register";
 import ForgotPassword from "./ForgotPassword";
+import jwtDecode from "jwt-decode";
 import axios from "axios";
 
 const Login = () => {
@@ -23,7 +24,17 @@ const Login = () => {
         password: password,
       });
       localStorage.setItem("token", response.data);
-      alert("Login successful");
+
+      const decodedToken = jwtDecode(token);
+      const userRole = decodedToken.role;
+
+      if (userRole === "Admin") {
+        window.location.href = "/AdminPage";
+      } else if (userRole === "User") {
+        window.location.href = "/UserPage";
+      } else {
+        setError("Unknown user role");
+      }
     } catch (error) {
       setError("Invalid username or password");
     } finally {

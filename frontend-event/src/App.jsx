@@ -59,7 +59,6 @@ function App() {
             <Route path="/user" element={<UserPage />} />
             <Route path="/MockMenu" element={<div>Mock Menu Content</div>} />
             <Route path="/events" element={<EventPage />} />
-            <Route path="/filter" element={<Filter />} />
             <Route path="/allfriends" element={<FriendsAll />} />
             <Route path="/editprofile" element={<EditProfile />} />
           </Route>
