@@ -8,18 +8,19 @@ const EventDetailsPopup = ({ event, onClose }) => {
 
     const currentDate = new Date();
 
-    const upcomingDates = event.dates.filter(date => new Date(date) >= currentDate)
+    const upcomingDates = event.dates.filter(date => new Date(date) >= currentDate).sort((a, b) => new Date(a) - new Date(b));
+
 
     const handleRedirect = (url) => {
         window.open(url);
     }
 
     return (
-        <div className="fixed inset-0 flex-col items-center content-center justify-center align-middle bg-flesh bg-opacity-50 transition-opacity duration-300 ease-out opacity-0 animate-fadeIn max-h-screen overflow-y-auto">
+        <div className="fixed z-30 inset-0 flex-col items-center content-center justify-center align-middle bg-flesh bg-opacity-50 transition-opacity duration-300 ease-out opacity-0 animate-fadeIn max-h-screen overflow-y-auto">
             <a href="#">
-                <img className="rounded-t-lg object-cover" src={event.imageUrl} alt="" />
+                <img className="rounded-t-lg object-cover w-full" src={event.imageUrl} alt="" />
             </a>
-            <div className="bg-gray-300 p-5 rounded-lg max-w-lg overflow-y-auto max-h-screen">
+            <div className="bg-gray-300 p-5 rounded-lg w-full overflow-y-auto max-h-screen">
                 <h2 className="text-xl font-bold">{event.title}</h2>
                 <div className="dates-container">
                     {/* Display multiple dates if they exist, or a single date */}
@@ -54,7 +55,7 @@ const EventDetailsPopup = ({ event, onClose }) => {
                 </div>
 
 
-                <div className="max-h-screen mb-3"> <p className="mt-1"><strong>Beskrivning:</strong> {eventDescription}</p></div>
+                <div className="max-h-screen mb-3 "> <p className="mt-1"><strong>Beskrivning:</strong> {eventDescription}</p></div>
 
 
                 <p><strong>Adress:</strong> {event.venue.address}, {event.venue.city}</p>
