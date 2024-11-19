@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Register from "./Register";
 import ForgotPassword from "./ForgotPassword";
-import jwtDecode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 
 const Login = () => {
@@ -82,9 +82,8 @@ const Login = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className={`w-full py-2 mb-4 text-white rounded-lg ${
-              isLoading ? "bg-gray-400" : "bg-[#CE9F9F] hover:bg-opacity-90"
-            }`}
+            className={`w-full py-2 mb-4 text-white rounded-lg ${isLoading ? "bg-gray-400" : "bg-[#CE9F9F] hover:bg-opacity-90"
+              }`}
           >
             {isLoading ? "Loggar in..." : "Login"}
           </button>
