@@ -11,6 +11,7 @@ import UserPage from "./pages/UserPage";
 import Filter from "./components/FilterPopup";
 import FriendsAll from "./components/FriendsAll";
 import EditProfile from "./components/EditProfile";
+import Login from './pages/Login'
 
 const buttonsConfig = [
   {
