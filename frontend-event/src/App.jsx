@@ -6,12 +6,13 @@ import {
   Outlet,
 } from "react-router-dom";
 import SideMenuLayout from "./pages/SideMenu";
-import EventPage from "./pages/EventPage";
+import EventPage from "./pages/eventPage";
 import UserPage from "./pages/UserPage";
 import Filter from "./components/FilterPopup";
 import FriendsAll from "./components/FriendsAll";
 import EditProfile from "./components/EditProfile";
 import Login from './pages/Login'
+import LandingPage from './pages/landingPage'
 
 
 
