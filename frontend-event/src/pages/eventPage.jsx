@@ -120,7 +120,7 @@ const EventPage = () => {
                 <ChooseDateButton onDateSelect={handleDateSelect} />
             </div>
 
-            <div className="min-h-screen pt-10 bg-DarkPurple flex flex-col align-middle justify-evenly content-evenly">
+            <div className="min-h-screen pt-10  bg-DarkPurple flex flex-col align-middle justify-evenly content-evenly">
 
                 {displayedEvents.map((event) => (
                     <EventCard key={event.eventId} event={event} />
@@ -134,8 +134,8 @@ const EventPage = () => {
                 {/* Pagination Controls */}
                 <ReactPaginate
                     pageCount={Math.ceil(events.length / eventsPerPage)} // Total number of pages
-                    pageRangeDisplayed={3} // Number of pages to show in pagination
-                    marginPagesDisplayed={2} // Number of pages to show on either side of the current page
+                    pageRangeDisplayed={2} // Number of pages to show in pagination
+                    marginPagesDisplayed={1} // Number of pages to show on either side of the current page
                     onPageChange={handlePageChange}
                     pageClassName="px-1 mx-1 border-2 rounded-lg "
                     containerClassName="pagination flex justify-center my-8 border-black ml-10 bg-white py-2 text-xl "
