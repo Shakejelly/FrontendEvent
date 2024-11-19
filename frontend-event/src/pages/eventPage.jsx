@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import EventCard from '../components/EventCard';
 import ChooseDateButton from '../components/ChooseDate';
+import ReactPaginate from 'react-paginate';
 
 const EventPage = () => {
     const [events, setEvents] = useState([]);
@@ -11,9 +12,17 @@ const EventPage = () => {
     const [page, setPage] = useState(1);
     const [selectedDate, setSelectedDate] = useState(null);
 
-    const eventsPerPage = 50;
+    const eventsPerPage = 10;
+
     const ticketMasterEndpoint = 'https://localhost:7261/TicketMasterAPI/getEvents';
     const visitStockholmEndpoint = 'https://localhost:7261/VisitStockholmAPI/getEvents';
+
+    const normalizeImageUrl = (url) => {
+        if (url && !url.startsWith('http://') && !url.startsWith('https://')) {
+            return `https://${url}`;
+        }
+        return url;
+    };
 
     // Fetch events from both APIs with pagination
     useEffect(() => {
@@ -22,14 +31,19 @@ const EventPage = () => {
                 setLoading(true);
 
                 const [response1, response2] = await Promise.all([
-                    axios.get(`${ticketMasterEndpoint}?page=${page}&limit=${eventsPerPage}`),
-                    axios.get(`${visitStockholmEndpoint}?page=${page}&limit=${eventsPerPage}`)
+                    axios.get(ticketMasterEndpoint),
+                    axios.get(visitStockholmEndpoint)
                 ]);
 
-                // Backend ska lägga till Pagination för Ticketmaster?
+                let allEvents = [...response1.data, ...response2.data];
 
-                const allEvents = [...response1.data, ...response2.data];
-                console.log("All Events:", allEvents);
+                // Normalize image URLs
+                allEvents = allEvents.map(event => ({
+                    ...event,
+                    imageUrl: normalizeImageUrl(event.imageUrl),
+                }));
+
+                console.log("All Events with Normalized URLs:", allEvents);
 
                 // Sort and remove duplicates
                 const sortedEvents = allEvents.sort((a, b) => {
@@ -50,10 +64,7 @@ const EventPage = () => {
 
                 console.log("Unique Events:", uniqueEvents);
 
-                // Set events and filter the first 10
                 setEvents(uniqueEvents);
-                setDisplayedEvents(uniqueEvents.slice(0, eventsPerPage));
-
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching events:', error);
@@ -63,7 +74,7 @@ const EventPage = () => {
         };
 
         fetchEvents();
-    }, [page]);  // Triggered on page change
+    }, []);  // Empty array to only run once on mount
 
     // Handle date selection and filter events
     const handleDateSelect = (date) => {
@@ -85,39 +96,55 @@ const EventPage = () => {
         }
     }, [selectedDate, events]);
 
-    useEffect(() => {
-        console.log("displayedEvents", displayedEvents)
-    })
+    // Handle page change in ReactPaginate
+    const handlePageChange = ({ selected }) => {
+        setPage(selected + 1); // ReactPaginate uses 0-based indexing, so add 1
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth', // Enables smooth scrolling
+        });
+    };
 
-    // Handle infinite scroll to load more events
+    // Paginate the events based on the current page
     useEffect(() => {
-        const handleScroll = () => {
-            if (
-                window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 100 &&
-                !loading
-            ) {
-                setPage(prevPage => prevPage + 1); // Go to the next page
-            }
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [loading]);
+        const startIndex = (page - 1) * eventsPerPage;
+        const endIndex = startIndex + eventsPerPage;
+        setDisplayedEvents(events.slice(startIndex, endIndex));
+    }, [page, events]);
 
     return (
+
         <main className="bg-DarkPurple">
+
             <div className="-z-20">
                 <ChooseDateButton onDateSelect={handleDateSelect} />
             </div>
-            <div className="min-h-screen pt-10 bg-DarkPurple flex flex-col align-middle justify-evenly content-evenly">
+
+            <div className="min-h-screen pt-10  bg-DarkPurple flex flex-col align-middle justify-evenly content-evenly">
+
                 {displayedEvents.map((event) => (
                     <EventCard key={event.eventId} event={event} />
                 ))}
 
-                {loading && <div class="flex justify-center items-center">
-                    <div class="animate-spin rounded-full border-t-4 border-white border-solid w-16 h-16"></div>
+                {loading && <div className="flex justify-center items-center">
+                    <div className="animate-spin rounded-full border-t-4 border-white border-solid w-16 h-16"></div>
                 </div>}
                 {error && <div>Error loading events: {error.message}</div>}
+
+                {/* Pagination Controls */}
+                <ReactPaginate
+                    pageCount={Math.ceil(events.length / eventsPerPage)} // Total number of pages
+                    pageRangeDisplayed={2} // Number of pages to show in pagination
+                    marginPagesDisplayed={1} // Number of pages to show on either side of the current page
+                    onPageChange={handlePageChange}
+                    pageClassName="px-1 mx-1 border-2 rounded-lg "
+                    containerClassName="pagination flex justify-center my-8 border-black ml-10 bg-white py-2 text-xl "
+                    activeClassName="bg-DarkPurple text-white rounded-lg"
+                    previousLabel="Previous "
+                    nextLabel="Next"
+                    previousClassName="px-1 border-2 rounded-lg"
+                    nextClassName='px-1 border-2 rounded-lg'
+                />
             </div>
         </main>
     );
