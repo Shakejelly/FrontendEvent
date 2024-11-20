@@ -43,7 +43,7 @@ const Register = () => {
         className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg"
       >
         <h2 className="mb-6 text-3xl font-bold text-center text-purple-700">
-          Register
+          Registrera
         </h2>
 
         {error && (
@@ -52,7 +52,7 @@ const Register = () => {
 
         <div className="mb-4">
           <label className="block mb-2 text-sm font-medium text-gray-700">
-            Username
+            Användarnamn
           </label>
           <input
             type="text"
@@ -80,7 +80,7 @@ const Register = () => {
 
         <div className="mb-4">
           <label className="block mb-2 text-sm font-medium text-gray-700">
-            Password
+            Lösenord
           </label>
           <input
             type="password"
@@ -94,7 +94,7 @@ const Register = () => {
 
         <div className="mb-6">
           <label className="block mb-2 text-sm font-medium text-gray-700">
-            Confirm Password
+            Bekfräfta lösenord
           </label>
           <input
             type="password"
