@@ -42,6 +42,13 @@ function SideMenuLayout({ buttons }) {
                                 {button.label}
                             </button>
                         ))}
+                        <a href="https://localhost:7295" target='_top'>
+                            <button className="bg-red-200 shadow-[inset_0_-1px_2px_rgba(0,0,0,0.6)] 
+                        hover:bg-red-200 hover:shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] 
+                        text-white w-full mb- py-4 px-10 rounded text-[20px]">
+                                About us
+                            </button>
+                        </a>
                     </div>
                     <div className='sidebar_footer flex p-1 '>
                         <div className='sidebar_settings #CE9F9F p-1 bg-red-200 shadow-[inset_0_-1px_2px_rgba(0,0,0,0.6)] hover:bg-red-200 hover:shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] text-white h-full' onClick={e => e.stopPropagation()}>
