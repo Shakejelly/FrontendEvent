@@ -65,7 +65,7 @@ const EventCard = ({ event, onFavoriteToggle }) => {
                 <a href="#">
                     <h6 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{event.title}</h6>
                 </a>
-                <p className="mb-4">{event.venue.name} - {event.venue.city}</p>
+                <p className="mb-4">{event.venue.name} {event.venue.city}</p>
                 <div className="flex flex-row justify-between">
                     <button onClick={handleDetailsClick} href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-DarkPurple rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:purpleContrast dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Detaljer

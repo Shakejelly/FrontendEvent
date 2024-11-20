@@ -59,11 +59,18 @@ const EventDetailsPopup = ({ event, onClose }) => {
 
 
                 <p><strong>Adress:</strong> {event.venue.address}, {event.venue.city}</p>
-                <p><strong>Pris från:</strong> {event.lowestPrice !== 0 ? event.lowestPrice : event.highestPrice}:-</p>
-                <a onClick={() => handleRedirect(event.eventUrlPage)} className="mt-3 mr-5 bg-DarkPurple text-white px-4 py-2 rounded">
-                    Biljetter
-                </a>
-                <button onClick={onClose} className="mt-3 bg-DarkPurple text-white px-4 py-2 rounded">Close</button>
+                <p>
+                    <strong>Pris från: </strong>
+                    {event.lowestPrice === 0 ? "Se biljettssida" : (event.lowestPrice !== 0 ? `${event.lowestPrice}:-` : event.highestPrice)}
+                </p>
+
+                <button>
+                    <a onClick={() => handleRedirect(event.eventUrlPage)} className="mt-3 mr-5 bg-DarkPurple text-white px-4 py-2 rounded">
+                        Biljetter
+                    </a>
+                </button>
+
+                <button onClick={onClose} className="mt-3 bg-DarkPurple text-white px-4 py-2 rounded">Stäng</button>
             </div>
         </div>
     );

@@ -9,6 +9,9 @@ export default {
       colors: {
         Flesh: '#CE9F9F',
         DarkPurple: '#71546B',
+      },
+      fontFamily: {
+        'mplus': ['"M PLUS Rounded 1c"', 'sans-serif'],
       }
     },
   },

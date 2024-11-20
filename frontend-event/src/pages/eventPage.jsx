@@ -138,7 +138,7 @@ const EventPage = () => {
                     marginPagesDisplayed={1} // Number of pages to show on either side of the current page
                     onPageChange={handlePageChange}
                     pageClassName="px-1 mx-1 border-2 rounded-lg "
-                    containerClassName="pagination flex justify-center my-8 border-black ml-10 bg-white py-2 text-xl "
+                    containerClassName="pagination flex justify-center my-8 border-black ml-10 bg-white py-2 text-l "
                     activeClassName="bg-DarkPurple text-white rounded-lg"
                     previousLabel="Previous "
                     nextLabel="Next"
