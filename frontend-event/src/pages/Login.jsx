@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Register from "./Register";
 import ForgotPassword from "./ForgotPassword";
 import { useNavigate } from "react-router-dom";
-import jwtDecode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 
 const Login = () => {
@@ -37,10 +37,10 @@ const Login = () => {
       } else if (userRole === "User") {
         navigate("/UserPage");
       } else {
-        setError("Unknown user role");
+        setError("Okänd roll");
       }
     } catch (error) {
-      setError("Invalid username or password");
+      setError("Ogiltigt användarnamn eller lösenord");
     } finally {
       setIsLoading(false);
     }
@@ -99,14 +99,14 @@ const Login = () => {
               onClick={handleRegisterView}
               className="text-DarkPurple hover:underline"
             >
-              Register
+              Registrera
             </button>
             <button
               type="button"
               onClick={handleForgotPasswordView}
               className="text-DarkPurple hover:underline"
             >
-              Forgot Password
+              Glömt lösenord
             </button>
           </div>
           <button
@@ -114,7 +114,7 @@ const Login = () => {
             onClick={handleGoogleLogin}
             className="w-full px-4 py-2 text-DarkPurple border border-DarkPurple rounded-lg hover:bg-DarkPurple hover:text-white"
           >
-            Login with Google
+            Logga in med Google
           </button>
         </form>
       )}
