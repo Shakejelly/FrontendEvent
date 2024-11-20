@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Register from "./Register";
 import ForgotPassword from "./ForgotPassword";
+import { useNavigate } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 import axios from "axios";
 
 const Login = () => {
@@ -10,6 +12,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [view, setView] = useState("login");
 
+  const navigate = useNavigate();
   const apiBaseURL = "https://localhost:7261/api/Auth/";
 
   const handleSubmit = async (e) => {
@@ -22,8 +25,20 @@ const Login = () => {
         userName: username,
         password: password,
       });
-      localStorage.setItem("token", response.data);
-      alert("Login successful");
+
+      const token = response.data;
+      localStorage.setItem("token", token);
+
+      const decodedToken = jwtDecode(token);
+      const userRole = decodedToken.role;
+
+      if (userRole === "Admin") {
+        navigate("/AdminPage");
+      } else if (userRole === "User") {
+        navigate("/UserPage");
+      } else {
+        setError("Unknown user role");
+      }
     } catch (error) {
       setError("Invalid username or password");
     } finally {
