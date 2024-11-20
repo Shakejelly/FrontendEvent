@@ -14,6 +14,7 @@ import EditProfile from "./components/EditProfile";
 import Login from './pages/Login'
 import LandingPage from './pages/landingPage'
 import { Link } from "react-router-dom";
+import AboutUs from "./components/AboutUs";
 
 
 
@@ -58,6 +59,7 @@ function App() {
             <Route path="/events" element={<EventPage />} />
             <Route path="/allfriends" element={<FriendsAll />} />
             <Route path="/editprofile" element={<EditProfile />} />
+            <Route path="/aboutus" element={<AboutUs />} />
           </Route>
         </Routes>
       </Router>
