@@ -10,8 +10,7 @@ const UserPage = () => {
     const [friends, setFriends] = useState([]);
     const [friendReq, setFriendReq] = useState([])
     const navigate = useNavigate();
-    const userId = "73f663e9-f16b-4503-988a-461318f3ebca";
-    // const { userId } = useParams(); id bör komma som param från app.jsx sidan?
+    const { userId } = useParams();
 
     useEffect(() => {
         const getUser = async () => {
@@ -32,8 +31,7 @@ const UserPage = () => {
             }
         };
         getUser();
-    }, [])
-    // }, [userId]); borde bytas ut sen när vi använder inskickad id så den kan uppdatera till nya user som kmr in
+    }, [userId]);
 
     // function with 'navigate' for editProfile to send userId as prop
     const HandleEditProfile = () => {
@@ -58,7 +56,7 @@ const UserPage = () => {
                     <div>
                         <button
                             onClick={HandleEditProfile}
-                            className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-Flesh 
+                            className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-black bg-Flesh 
                             rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:purpleContrast 
                             dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-1">
                             Edit profile
@@ -71,12 +69,6 @@ const UserPage = () => {
                     {/* favorite Box component */}
                     <FavoriteBox id={userId} />
                 </div>
-
-                {/* h
-                <div className="userCard w-full max-w-sm flex justify-center max-h-96 mt-5 ml-10"> {/* Set a max-width for the card */}
-                {/* <UserCard /> */}
-                {/* </div> */}
-
             </div>
         </>
 
@@ -84,3 +76,4 @@ const UserPage = () => {
 }
 
 export default UserPage
+// const userId = "73f663e9-f16b-4503-988a-461318f3ebca";
