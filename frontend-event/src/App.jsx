@@ -14,7 +14,6 @@ import UserPage from "./pages/UserPage";
 import FriendsAll from "./components/FriendsAll";
 import EditProfile from "./components/EditProfile";
 import Login from "./pages/Login";
-import LandingPage from "./pages/landingPage";
 import { Link } from "react-router-dom";
 import Login from './pages/Login'
 import LandingPage from './pages/LandingPage'
