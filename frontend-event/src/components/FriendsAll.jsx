@@ -11,11 +11,13 @@ const FriendsAll = () => {
             <div className='userPage min-h-screen bg-DarkPurple flex justify-center item-center'>
                 <div className="flex flex-col justify-top items-left mt-4 space-y-4 h-[90%]">
 
-                    <div><Link to="/user" className='shadow hover:text-white'>Back</Link></div>
+                    <div><Link to="/user" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-Flesh 
+                            rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:purpleContrast 
+                            dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-1">Back</Link></div>
 
                     {friends.length > 0 ? (friends.map((friend, index) => (
 
-                        <div key={index} className='flex justify-left shadow-md w-[20rem] hover:scale-105 rounded-md'>
+                        <div key={index} className='flex justify-left shadow-md w-[17rem] hover:scale-105 rounded-md bg-Flesh'>
                             <div>
                                 <img src={friend.profilePictureUrl} alt="FriendProfilePicture" className="w-12 h-12 rounded-md object-cover border-2 border-purple-500" />
                             </div>

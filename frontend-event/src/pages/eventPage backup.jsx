@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import EventCard from '../components/EventCard';
 import ChooseDateButton from '../components/ChooseDate';
 
-
 const EventPage = () => {
     const [events, setEvents] = useState([]);
     const [displayedEvents, setDisplayedEvents] = useState([]);
@@ -27,7 +26,8 @@ const EventPage = () => {
                     axios.get(`${visitStockholmEndpoint}?page=${page}&limit=${eventsPerPage}`)
                 ]);
 
-                // Combine the data
+                // Backend ska lägga till Pagination för Ticketmaster?
+
                 const allEvents = [...response1.data, ...response2.data];
                 console.log("All Events:", allEvents);
 
@@ -37,7 +37,6 @@ const EventPage = () => {
                     const dateB = new Date(b.dates[0]);
                     return dateA - dateB;
                 });
-                console.log("Sorted Events:", sortedEvents);
 
                 const seen = new Set();
                 const uniqueEvents = sortedEvents.filter(event => {
@@ -51,12 +50,9 @@ const EventPage = () => {
 
                 console.log("Unique Events:", uniqueEvents);
 
-                // Only update displayedEvents after sorting and deduplication
-                setEvents(uniqueEvents);  // This stores the full list of unique events
-                setDisplayedEvents(uniqueEvents.slice(0, 10));  // This stores only the first 10 events
-
-                // Log the state right after setting
-                console.log("Displayed Events (after set):", uniqueEvents.slice(0, 10));
+                // Set events and filter the first 10
+                setEvents(prevEvents => [...prevEvents, ...uniqueEvents]);
+                setDisplayedEvents(prevDisplayed => [...prevDisplayed, ...uniqueEvents]);
 
                 setLoading(false);
             } catch (error) {
@@ -68,10 +64,6 @@ const EventPage = () => {
 
         fetchEvents();
     }, [page]);  // Triggered on page change
-
-    useEffect(() => {
-        console.log('displayed events', displayedEvents); // This will log after displayedEvents is updated
-    }, [displayedEvents]); // This runs every time displayedEvents changes
 
     // Handle date selection and filter events
     const handleDateSelect = (date) => {
@@ -87,12 +79,15 @@ const EventPage = () => {
                     return eventDate >= selectedDate; // Check if the event's date is on or after the selected date
                 })
             );
-            setDisplayedEvents(filteredEvents);  // Set filtered events to the state
+            setDisplayedEvents(filteredEvents.slice(0, eventsPerPage));  // Set filtered events to the state
         } else {
-            setDisplayedEvents(events);  // Show all events if no date is selected
+            setDisplayedEvents(events.slice(0, eventsPerPage));  // Show all events if no date is selected
         }
     }, [selectedDate, events]);
 
+    useEffect(() => {
+        console.log("displayedEvents", displayedEvents)
+    })
 
     // Handle infinite scroll to load more events
     useEffect(() => {
@@ -112,7 +107,6 @@ const EventPage = () => {
     return (
         <main className="bg-DarkPurple">
             <div className="-z-20">
-
                 <ChooseDateButton onDateSelect={handleDateSelect} />
             </div>
             <div className="min-h-screen pt-10 bg-DarkPurple flex flex-col align-middle justify-evenly content-evenly">
@@ -122,20 +116,19 @@ const EventPage = () => {
 
                 {loading && <div class="flex justify-center items-center">
                     <div class="animate-spin rounded-full border-t-4 border-white border-solid w-16 h-16"></div>
-                </div>
-                }
+                </div>}
                 {error && <div>Error loading events: {error.message}</div>}
             </div>
             {/* <div class="bg-gray-100 rounded-lg p-4 w-full max-w-sm mx-auto">
-                
-                <div class="text-center mb-2 text-gray-800 font-medium">    
+
+                <div class="text-center mb-2 text-gray-800 font-medium">
                     Laddade 40 av 630 evenemang
                 </div>
                 <div class="h-1 bg-gray-300 rounded-full overflow-hidden mb-4">
                     <div class="h-full w-1/6 bg-black"></div>
                 </div>
 
-               
+
                 <button class="flex items-center justify-center w-full py-2 border border-gray-400 rounded-full text-gray-800 font-medium">
                     Fler evenemang
                     <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">

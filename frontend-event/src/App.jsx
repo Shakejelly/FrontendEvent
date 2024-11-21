@@ -13,6 +13,9 @@ import UserPage from "./pages/UserPage";
 import Filter from "./components/FilterPopup";
 import FriendsAll from "./components/FriendsAll";
 import EditProfile from "./components/EditProfile";
+import Login from "./pages/Login";
+import LandingPage from "./pages/landingPage";
+import { Link } from "react-router-dom";
 
 const buttonsConfig = [
   {
@@ -27,16 +30,6 @@ const buttonsConfig = [
   },
   {
     label: "Saved",
-    className:
-      "bg-red-200 shadow-[inset_0_-1px_2px_rgba(0,0,0,0.6)] hover:bg-red-200 hover:shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] text-white",
-  },
-  {
-    label: "Sport",
-    className:
-      "bg-red-200 shadow-[inset_0_-1px_2px_rgba(0,0,0,0.6)] hover:bg-red-200 hover:shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] text-white",
-  },
-  {
-    label: "Music",
     className:
       "bg-red-200 shadow-[inset_0_-1px_2px_rgba(0,0,0,0.6)] hover:bg-red-200 hover:shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] text-white",
   },
@@ -56,13 +49,13 @@ function App() {
     <>
       <Router>
         <Routes>
+          <Route path="/home" element={<LandingPage />}></Route>
           <Route path="/" element={<MainLayout />}>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/user" element={<UserPage />} />
             <Route path="/MockMenu" element={<div>Mock Menu Content</div>} />
             <Route path="/events" element={<EventPage />} />
-            <Route path="/filter" element={<Filter />} />
             <Route path="/allfriends" element={<FriendsAll />} />
             <Route path="/editprofile" element={<EditProfile />} />
           </Route>
