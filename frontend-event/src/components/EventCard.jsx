@@ -58,14 +58,14 @@ const EventCard = ({ event, onFavoriteToggle }) => {
     return (
         <div className="mt-8 ml-16 flex-col w-4/5 max-w-full bg-Flesh border border-gray-200 rounded-lg shadow dark:purpleDark dark:border-gray-700">
             <a href="#">
-                <img className="rounded-t-lg object-cover w-full" src={event.imageUrl} alt="" />
+                <img className="rounded-t-lg object-cover w-full" src={event.imageUrl} alt="official event image" />
             </a>
             <div className="p-5 ">
                 <p className="mb-3 font-normal text-black-700 dark:text-black-400">{dateDisplay}</p>
                 <a href="#">
                     <h6 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{event.title}</h6>
                 </a>
-                <p className="mb-4">{event.venue.name} - {event.venue.city}</p>
+                <p className="mb-4">{event.venue.name} {event.venue.city}</p>
                 <div className="flex flex-row justify-between">
                     <button onClick={handleDetailsClick} href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-DarkPurple rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:purpleContrast dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Detaljer

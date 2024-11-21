@@ -9,13 +9,19 @@ import SideMenuLayout from "./pages/SideMenu";
 import EventPage from "./pages/EventPage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import EventPage from "./pages/EventPage";
 import UserPage from "./pages/UserPage";
-import Filter from "./components/FilterPopup";
 import FriendsAll from "./components/FriendsAll";
 import EditProfile from "./components/EditProfile";
 import Login from "./pages/Login";
 import LandingPage from "./pages/landingPage";
 import { Link } from "react-router-dom";
+import Login from './pages/Login'
+import LandingPage from './pages/LandingPage'
+
+
+
+
 
 const buttonsConfig = [
   {
@@ -49,7 +55,8 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/home" element={<LandingPage />}></Route>
+          <Route path="/start" element={<LandingPage />}></Route>
+          <Route path="/login" element={<Login />} />
           <Route path="/" element={<MainLayout />}>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

@@ -18,7 +18,7 @@ const EventDetailsPopup = ({ event, onClose }) => {
     return (
         <div className="fixed z-30 inset-0 flex-col items-center content-center justify-center align-middle bg-flesh bg-opacity-50 transition-opacity duration-300 ease-out opacity-0 animate-fadeIn max-h-screen overflow-y-auto">
             <a href="#">
-                <img className="rounded-t-lg object-cover w-full" src={event.imageUrl} alt="" />
+                <img className="rounded-t-lg object-cover w-full" src={event.imageUrl} alt="official event image" />
             </a>
             <div className="bg-gray-300 p-5 rounded-lg w-full overflow-y-auto max-h-screen">
                 <h2 className="text-xl font-bold">{event.title}</h2>
@@ -55,15 +55,22 @@ const EventDetailsPopup = ({ event, onClose }) => {
                 </div>
 
 
-                <div className="max-h-screen mb-3 "> <p className="mt-1"><strong>Beskrivning:</strong> {eventDescription}</p></div>
+                <div className="max-h-screen mb-3 "> <p className="mt-1"><strong>Beskrivning:</strong> {eventDescription || "Ingen beskrivning tillgänglig."}</p></div>
 
 
                 <p><strong>Adress:</strong> {event.venue.address}, {event.venue.city}</p>
-                <p><strong>Pris från:</strong> {event.lowestPrice !== 0 ? event.lowestPrice : event.highestPrice}:-</p>
-                <a onClick={() => handleRedirect(event.eventUrlPage)} className="mt-3 mr-5 bg-DarkPurple text-white px-4 py-2 rounded">
-                    Biljetter
-                </a>
-                <button onClick={onClose} className="mt-3 bg-DarkPurple text-white px-4 py-2 rounded">Close</button>
+                <p>
+                    <strong>Pris från: </strong>
+                    {event.lowestPrice === 0 ? "Se biljettssidan" : (event.lowestPrice !== 0 ? `${event.lowestPrice}:-` : event.highestPrice)}
+                </p>
+
+                <button>
+                    <a onClick={() => handleRedirect(event.eventUrlPage)} className="mt-3 mr-5 bg-DarkPurple text-white px-4 py-2 rounded">
+                        Biljetter
+                    </a>
+                </button>
+
+                <button onClick={onClose} className="mt-3 bg-DarkPurple text-white px-4 py-2 rounded">Stäng</button>
             </div>
         </div>
     );
