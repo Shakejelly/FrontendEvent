@@ -1,27 +1,31 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import UserCard from '../components/UserCard'
 import FriendBox from '../components/FriendBox';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import FavoriteBox from '../components/FavoriteBox';
 
 const UserPage = () => {
     const [user, setUser] = useState(null);
     const [friends, setFriends] = useState([]);
+    const [friendReq, setFriendReq] = useState([])
     const navigate = useNavigate();
     const userId = "73f663e9-f16b-4503-988a-461318f3ebca";
+    // const { userId } = useParams(); id bör komma som param från app.jsx sidan?
+
     useEffect(() => {
         const getUser = async () => {
             try {
                 const usern = await axios.get(`https://localhost:7261/api/User/GetUserById?id=${userId}`)
                 const friendz = await axios.get(`https://localhost:7261/api/Friendship/ShowAllFriends?userId=${userId}`)
+                const requests = await axios.get(`https://localhost:7261/api/Friendship/ShowFriendRequests?userId=${userId}`)
                 if (!usern.data) {
                     console.log('Couldnt fetch data!', usern.data)
                 } else {
 
                     setUser(usern.data);
                     setFriends(friendz.data)
+                    setFriendReq(requests.data)
                 }
             } catch (error) {
                 console.error("Error fetching data", error);
@@ -29,6 +33,7 @@ const UserPage = () => {
         };
         getUser();
     }, [])
+    // }, [userId]); borde bytas ut sen när vi använder inskickad id så den kan uppdatera till nya user som kmr in
 
     // function with 'navigate' for editProfile to send userId as prop
     const HandleEditProfile = () => {
@@ -61,7 +66,7 @@ const UserPage = () => {
                     </div>
 
                     {/* friendsBox component */}
-                    <FriendBox friends={friends} />
+                    <FriendBox friends={friends} friendReq={friendReq} />
 
                     {/* favorite Box component */}
                     <FavoriteBox id={userId} />

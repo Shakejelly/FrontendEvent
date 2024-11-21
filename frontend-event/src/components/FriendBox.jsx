@@ -1,8 +1,8 @@
 import React from 'react'
-import FriendsAll from './FriendsAll'
 import { Link } from 'react-router-dom'
+import FRequestNoti from './FRequestNoti'
 
-const FriendBox = ({ friends }) => {
+const FriendBox = ({ friends, friendReq }) => {
     return (
         <>
             {/* friend container */}
@@ -12,8 +12,10 @@ const FriendBox = ({ friends }) => {
                 <div className='flex flex-row justify-between'>
 
                     {/* showing amount friends */}
-                    <div>
-                        <p className="text-x font-semibold text-gray-800 mb-4">{friends.length} Friends</p>
+                    <div className="flex items-center">
+                        <p className="text-x font-semibold text-gray-800 mr-1">{friends.length} Friends</p>
+                        {/* This div will contain incoming friendship requests. */}
+                        <FRequestNoti friendReq={friendReq} />
                     </div>
 
                     {/*Show all friends button*/}
@@ -29,20 +31,24 @@ const FriendBox = ({ friends }) => {
 
                     {friends.slice(0, 4).map((friend, index) => (
 
-                        // a div (card) that will be created for every user-object 
-                        <div key={index} className='bg-DarkPurple shadow-md hover:scale-105 rounded-lg p-5 w-[8rem] h-[8rem] mx-auto m-1'>
+                        // adding a link to be able to visit chosen friends profile.
+                        <Link to={`/user/${friend.id}`} key={index}>
 
-                            {/* div for friends profileImage. */}
-                            <div className='flex justify-center'>
-                                <img src={friend.profilePictureUrl} alt="FriendProfilePicture" className="w-12 h-12 rounded-md object-cover border-2 border-purple-500" />
+                            {/* // a div (card) that will be created for every user-object  */}
+                            <div className='bg-DarkPurple shadow-md hover:scale-105 rounded-lg p-5 w-[8rem] h-[8rem] mx-auto m-1'>
+
+                                {/* div for friends profileImage. */}
+                                <div className='flex justify-center'>
+                                    <img src={friend.profilePictureUrl} alt="FriendProfilePicture" className="w-12 h-12 rounded-md object-cover border-2 border-purple-500" />
+                                </div>
+
+                                {/* div for friends name */}
+                                <div className='flex justify-center pt-1 text-white'>
+                                    <p className='break-words text-center'>{friend.firstName} {friend.lastName}</p>
+                                </div>
                             </div>
 
-                            {/* div for friends name */}
-                            <div className='flex justify-center pt-1 text-white'>
-                                <p className='break-words text-center'>{friend.firstName} {friend.lastName}</p>
-                            </div>
-                        </div>
-
+                        </Link>
                     ))}
                 </div>
             </div>
