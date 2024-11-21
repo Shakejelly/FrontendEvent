@@ -39,9 +39,9 @@ const Login = () => {
       console.log(userRole);
 
       if (userRole === "Admin") {
-        navigate("/AdminPage");
+        navigate("/admin");
       } else if (userRole === "User") {
-        navigate("/UserPage");
+        navigate("/user");
       } else {
         setError("Okänd roll");
       }
