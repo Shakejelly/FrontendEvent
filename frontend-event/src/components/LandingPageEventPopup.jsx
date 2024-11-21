@@ -53,12 +53,20 @@ const LandingPageEventPopup = ({ event, onClose }) => {
                     {/* Adress & price */}
                     <div className="mt-3">
                         <p><strong>Adress:</strong> {event.venue.address}, {event.venue.city}</p>
-                        <p><strong>Pris från:</strong> {event.lowestPrice !== 0 ? event.lowestPrice : event.highestPrice}:-</p>
+                        <p>
+                            <strong>Pris från:</strong>
+                            {event.lowestPrice !== undefined && event.lowestPrice !== 0
+                                ? ` ${event.lowestPrice}:-`
+                                : (event.highestPrice !== undefined && event.highestPrice !== 0
+                                    ? ` ${event.highestPrice}:-`
+                                    : ' Se biljettssidan')}
+                        </p>
+
                     </div>
 
                     {/* buttons */}
                     <div className="mt-5 flex justify-between">
-                        <button onClick={() => handleRedirect(event.apiEventUrlPage)} className="bg-DarkPurple text-white px-4 py-2 rounded hover:bg-purple-800">Biljetter</button>
+                        <button onClick={() => handleRedirect(event.eventUrlPage)} className="bg-DarkPurple text-white px-4 py-2 rounded hover:bg-purple-800">Biljetter</button>
                         <button onClick={onClose} className="bg-DarkPurple text-white px-4 py-2 rounded hover:bg-purple-800">Stäng</button>
                     </div>
                 </div>

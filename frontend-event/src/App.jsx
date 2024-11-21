@@ -60,8 +60,9 @@ function App() {
       <Router>
         <Routes>
           <Route path="/home" element={<LandingPage />}></Route>
+          <Route path="/login" element={<Login />} />
           <Route path="/" element={<MainLayout />}>
-            <Route path="/login" element={<Login />} />
+
             <Route path="/user" element={<UserPage />} />
             <Route path="/MockMenu" element={<div>Mock Menu Content</div>} />
             <Route path="/events" element={<EventPage />} />

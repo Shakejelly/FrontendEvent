@@ -55,13 +55,13 @@ const EventDetailsPopup = ({ event, onClose }) => {
                 </div>
 
 
-                <div className="max-h-screen mb-3 "> <p className="mt-1"><strong>Beskrivning:</strong> {eventDescription}</p></div>
+                <div className="max-h-screen mb-3 "> <p className="mt-1"><strong>Beskrivning:</strong> {eventDescription || "Ingen beskrivning tillgänglig."}</p></div>
 
 
                 <p><strong>Adress:</strong> {event.venue.address}, {event.venue.city}</p>
                 <p>
                     <strong>Pris från: </strong>
-                    {event.lowestPrice === 0 ? "Se biljettssida" : (event.lowestPrice !== 0 ? `${event.lowestPrice}:-` : event.highestPrice)}
+                    {event.lowestPrice === 0 ? "Se biljettssidan" : (event.lowestPrice !== 0 ? `${event.lowestPrice}:-` : event.highestPrice)}
                 </p>
 
                 <button>

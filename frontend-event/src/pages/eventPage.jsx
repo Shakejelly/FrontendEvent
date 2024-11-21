@@ -16,6 +16,7 @@ const EventPage = () => {
 
     const ticketMasterEndpoint = 'https://localhost:7261/TicketMasterAPI/getEvents';
     const visitStockholmEndpoint = 'https://localhost:7261/VisitStockholmAPI/getEvents';
+    const KBEventsEndpoint = 'https://localhost:7621/KBEventAPI/getEvents'
 
     const normalizeImageUrl = (url) => {
         if (url && !url.startsWith('http://') && !url.startsWith('https://')) {

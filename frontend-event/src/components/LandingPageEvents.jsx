@@ -1,14 +1,11 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import LandingPageEventCards from './LandingPageEventCard'
-
+import React, { useEffect, useState } from 'react';
+import LandingPageEventCards from './LandingPageEventCard';
 
 const LandingPageEvents = () => {
     const [events, setEvents] = useState([]);
-    const [displayedEvents, setDisplayedEvents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [page, setPage] = useState(1);
 
     const ticketMasterEndpoint = 'https://localhost:7261/TicketMasterAPI/getEvents';
     const visitStockholmEndpoint = 'https://localhost:7261/VisitStockholmAPI/getEvents';
@@ -59,8 +56,6 @@ const LandingPageEvents = () => {
 
                 const lessEvents = uniqueEvents.slice(0, 20);
 
-
-
                 setEvents(lessEvents);
                 setLoading(false);
             } catch (error) {
@@ -71,19 +66,33 @@ const LandingPageEvents = () => {
         };
 
         fetchEvents();
-    }, []);  // Empty array to only run once on mount
+    }, []); // Empty array to only run once on mount
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center min-h-[20rem]">
+                <div className="w-12 h-12 border-4 border-t-white border-gray-400 rounded-full animate-spin"></div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="text-red-500 text-center">
+                <p>Failed to load events. Please try again later.</p>
+            </div>
+        );
+    }
 
     return (
-        <>
-            <div className='!mb-4 flex flex-row space-x-1 overflow-x-auto w-3/4 h-[auto] scrollbar-hide bg-red-200 shadow-lg shadow-red-200/50 rounded-md'>
-                {events.map((fa, index) => (
-                    <div key={index} className="flex-shrink-2 min-w-[17rem] py-4 min-h-[20rem]">
-                        <LandingPageEventCards event={fa} />
-                    </div>
-                ))}
-            </div>
-        </>
-    )
-}
+        <div className="!mb-4 m-auto flex flex-row space-x-1 overflow-x-auto w-3/4 h-auto scrollbar-hide bg-red-200 shadow-lg shadow-red-200/50 rounded-md">
+            {events.map((event, index) => (
+                <div key={index} className="flex-shrink-2 min-w-[17rem] py-4 min-h-[20rem]">
+                    <LandingPageEventCards event={event} />
+                </div>
+            ))}
+        </div>
+    );
+};
 
-export default LandingPageEvents
+export default LandingPageEvents;
