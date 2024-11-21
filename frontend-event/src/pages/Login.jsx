@@ -28,7 +28,6 @@ const Login = () => {
 
       const token = response.data.token;
       localStorage.setItem("token", token);
-      console.log(token);
 
       const decodedToken = jwtDecode(token);
       console.log(decodedToken);
@@ -57,7 +56,6 @@ const Login = () => {
   };
 
   const handleRegisterView = () => setView("register");
-  const handleForgotPasswordView = () => setView("forgotPassword");
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-DarkPurple">
@@ -106,13 +104,6 @@ const Login = () => {
               className="text-DarkPurple hover:underline"
             >
               Registrera
-            </button>
-            <button
-              type="button"
-              onClick={handleForgotPasswordView}
-              className="text-DarkPurple hover:underline"
-            >
-              Glömt lösenord
             </button>
           </div>
           <button
