@@ -6,17 +6,16 @@ import {
   Outlet,
 } from "react-router-dom";
 import SideMenuLayout from "./pages/SideMenu";
-import EventPage from "./pages/eventPage";
+import EventPage from "./pages/EventPage";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 import UserPage from "./pages/UserPage";
 import Filter from "./components/FilterPopup";
 import FriendsAll from "./components/FriendsAll";
 import EditProfile from "./components/EditProfile";
-import Login from './pages/Login'
-import LandingPage from './pages/landingPage'
+import Login from "./pages/Login";
+import LandingPage from "./pages/landingPage";
 import { Link } from "react-router-dom";
-
-
-
 
 const buttonsConfig = [
   {
@@ -53,6 +52,7 @@ function App() {
           <Route path="/home" element={<LandingPage />}></Route>
           <Route path="/" element={<MainLayout />}>
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/user" element={<UserPage />} />
             <Route path="/MockMenu" element={<div>Mock Menu Content</div>} />
             <Route path="/events" element={<EventPage />} />

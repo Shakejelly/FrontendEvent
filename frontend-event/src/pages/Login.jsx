@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Register from "./Register";
-import ForgotPassword from "./ForgotPassword";
+import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 
@@ -11,6 +11,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [view, setView] = useState("login");
 
+  const navigate = useNavigate();
   const apiBaseURL = "https://localhost:7261/api/Auth/";
 
   const handleSubmit = async (e) => {
@@ -23,20 +24,29 @@ const Login = () => {
         userName: username,
         password: password,
       });
-      localStorage.setItem("token", response.data);
+      console.log(response);
+
+      const token = response.data.token;
+      localStorage.setItem("token", token);
+      console.log(token);
 
       const decodedToken = jwtDecode(token);
-      const userRole = decodedToken.role;
+      console.log(decodedToken);
+
+      const roleKey =
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role";
+      const userRole = decodedToken[roleKey];
+      console.log(userRole);
 
       if (userRole === "Admin") {
-        window.location.href = "/AdminPage";
+        navigate("/admin");
       } else if (userRole === "User") {
-        window.location.href = "/UserPage";
+        navigate("/user");
       } else {
-        setError("Unknown user role");
+        setError("Okänd roll");
       }
     } catch (error) {
-      setError("Invalid username or password");
+      setError("Ogiltigt användarnamn eller lösenord");
     } finally {
       setIsLoading(false);
     }
@@ -82,8 +92,9 @@ const Login = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className={`w-full py-2 mb-4 text-white rounded-lg ${isLoading ? "bg-gray-400" : "bg-[#CE9F9F] hover:bg-opacity-90"
-              }`}
+            className={`w-full py-2 mb-4 text-white rounded-lg ${
+              isLoading ? "bg-gray-400" : "bg-[#CE9F9F] hover:bg-opacity-90"
+            }`}
           >
             {isLoading ? "Loggar in..." : "Login"}
           </button>
@@ -94,14 +105,14 @@ const Login = () => {
               onClick={handleRegisterView}
               className="text-DarkPurple hover:underline"
             >
-              Register
+              Registrera
             </button>
             <button
               type="button"
               onClick={handleForgotPasswordView}
               className="text-DarkPurple hover:underline"
             >
-              Forgot Password
+              Glömt lösenord
             </button>
           </div>
           <button
@@ -109,13 +120,12 @@ const Login = () => {
             onClick={handleGoogleLogin}
             className="w-full px-4 py-2 text-DarkPurple border border-DarkPurple rounded-lg hover:bg-DarkPurple hover:text-white"
           >
-            Login with Google
+            Logga in med Google
           </button>
         </form>
       )}
 
       {view === "register" && <Register />}
-      {view === "forgotPassword" && <ForgotPassword />}
     </div>
   );
 };
