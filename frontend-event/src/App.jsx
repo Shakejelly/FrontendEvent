@@ -8,6 +8,7 @@ import {
 import SideMenuLayout from "./pages/SideMenu";
 import EventPage from "./pages/EventPage";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import UserPage from "./pages/UserPage";
 import Filter from "./components/FilterPopup";
 import FriendsAll from "./components/FriendsAll";
@@ -57,6 +58,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/user" element={<UserPage />} />
             <Route path="/MockMenu" element={<div>Mock Menu Content</div>} />
             <Route path="/events" element={<EventPage />} />

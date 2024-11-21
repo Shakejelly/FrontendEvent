@@ -25,8 +25,9 @@ const Register = () => {
         password: password,
         confirmPassword: confirmpassword,
       });
-      alert("Registrering lyckades!");
+      // /*alert("Registrering lyckades!");
       navigate("/login");
+      console.log("Koden har lästs navigate");
     } catch (error) {
       setError(
         "Registreringen misslyckades. Email eller användarnamn upptaget."

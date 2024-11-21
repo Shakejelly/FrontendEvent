@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Register from "./Register";
-import ForgotPassword from "./ForgotPassword";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
@@ -25,12 +24,19 @@ const Login = () => {
         userName: username,
         password: password,
       });
+      console.log(response);
 
-      const token = response.data;
+      const token = response.data.token;
       localStorage.setItem("token", token);
+      console.log(token);
 
       const decodedToken = jwtDecode(token);
-      const userRole = decodedToken.role;
+      console.log(decodedToken);
+
+      const roleKey =
+        "http://schemas.microsoft.com/ws/2008/06/identity/claims/role";
+      const userRole = decodedToken[roleKey];
+      console.log(userRole);
 
       if (userRole === "Admin") {
         navigate("/AdminPage");
@@ -120,7 +126,6 @@ const Login = () => {
       )}
 
       {view === "register" && <Register />}
-      {view === "forgotPassword" && <ForgotPassword />}
     </div>
   );
 };
