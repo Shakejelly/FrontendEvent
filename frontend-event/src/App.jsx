@@ -6,16 +6,13 @@ import {
   Outlet,
 } from "react-router-dom";
 import SideMenuLayout from "./pages/SideMenu";
-import EventPage from "./pages/EventPage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import EventPage from "./pages/EventPage";
 import UserPage from "./pages/UserPage";
 import FriendsAll from "./components/FriendsAll";
 import EditProfile from "./components/EditProfile";
-import Login from "./pages/Login";
 import { Link } from "react-router-dom";
-import Login from './pages/Login'
 import LandingPage from './pages/LandingPage'
 
 
@@ -57,7 +54,6 @@ function App() {
           <Route path="/start" element={<LandingPage />}></Route>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<MainLayout />}>
-            <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/user" element={<UserPage />} />
             <Route path="/MockMenu" element={<div>Mock Menu Content</div>} />
