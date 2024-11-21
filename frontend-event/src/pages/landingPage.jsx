@@ -1,6 +1,6 @@
 import React from "react";
 import logo from '../assets/EVLogo.png'
-import EventPage from "./eventPage";
+import EventPage from "./EventPage";
 import LandingPageEvents from "../components/LandingPageEvents";
 import { useNavigate } from "react-router-dom"
 

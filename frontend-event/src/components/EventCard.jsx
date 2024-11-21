@@ -58,7 +58,7 @@ const EventCard = ({ event, onFavoriteToggle }) => {
     return (
         <div className="mt-8 ml-16 flex-col w-4/5 max-w-full bg-Flesh border border-gray-200 rounded-lg shadow dark:purpleDark dark:border-gray-700">
             <a href="#">
-                <img className="rounded-t-lg object-cover w-full" src={event.imageUrl} alt="" />
+                <img className="rounded-t-lg object-cover w-full" src={event.imageUrl} alt="official event image" />
             </a>
             <div className="p-5 ">
                 <p className="mb-3 font-normal text-black-700 dark:text-black-400">{dateDisplay}</p>

@@ -6,12 +6,12 @@ import {
   Outlet,
 } from "react-router-dom";
 import SideMenuLayout from "./pages/SideMenu";
-import EventPage from "./pages/eventPage";
+import EventPage from "./pages/EventPage";
 import UserPage from "./pages/UserPage";
 import FriendsAll from "./components/FriendsAll";
 import EditProfile from "./components/EditProfile";
 import Login from './pages/Login'
-import LandingPage from './pages/landingPage'
+import LandingPage from './pages/LandingPage'
 
 
 
@@ -59,7 +59,7 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/home" element={<LandingPage />}></Route>
+          <Route path="/start" element={<LandingPage />}></Route>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<MainLayout />}>
             <Route path="/user" element={<UserPage />} />
