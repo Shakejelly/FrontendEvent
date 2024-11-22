@@ -40,8 +40,6 @@ const EditProfile = () => {
             <div className='userPage min-h-screen bg-DarkPurple flex justify-center item-center'>
                 <div className="flex flex-col justify-top items-left mt-4 space-y-4 h-[90%]">
 
-                    {/* <div><Link to="/user" className='shadow hover:text-white'>Back</Link></div> */}
-
                     <form className="flex flex-col space-y-2 max-w-lg mx-auto p-5 bg-white shadow-lg rounded-lg">
 
                         <label htmlFor="firstName" className="text-m font-medium text-gray-800">First name </label>
@@ -72,7 +70,7 @@ const EditProfile = () => {
                             <div className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-Flesh 
                             rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:purpleContrast 
                             dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-2">
-                                <Link to="/user">
+                                <Link to={"/user/"} >
                                     Back
                                 </Link>
                             </div>

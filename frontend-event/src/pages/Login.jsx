@@ -35,12 +35,13 @@ const Login = () => {
       const roleKey =
         "http://schemas.microsoft.com/ws/2008/06/identity/claims/role";
       const userRole = decodedToken[roleKey];
-      console.log(userRole);
+
+      console.log('userRole', userRole);
 
       if (userRole === "Admin") {
         navigate("/admin");
       } else if (userRole === "User") {
-        navigate("/user");
+        navigate("/user/");
       } else {
         setError("Okänd roll");
       }
@@ -90,9 +91,8 @@ const Login = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className={`w-full py-2 mb-4 text-white rounded-lg ${
-              isLoading ? "bg-gray-400" : "bg-[#CE9F9F] hover:bg-opacity-90"
-            }`}
+            className={`w-full py-2 mb-4 text-white rounded-lg ${isLoading ? "bg-gray-400" : "bg-[#CE9F9F] hover:bg-opacity-90"
+              }`}
           >
             {isLoading ? "Loggar in..." : "Login"}
           </button>

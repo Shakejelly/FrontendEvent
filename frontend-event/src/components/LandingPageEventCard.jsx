@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import FavoriteEventPopup from './FavoriteEventPopup';
 import './style/FavoriteEventCardStyle.css'
+import LandingPageEventPopup from './LandingPageEventPopup';
 
-const EventCard = ({ event }) => {
+const LandingPageEventCard = ({ event }) => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
-    const dateDisplay = event.date;
+    const dateDisplay = event.dates[0];
 
     const handleDetailsClick = () => {
         setIsPopupOpen(true);
@@ -19,7 +20,7 @@ const EventCard = ({ event }) => {
             {/* picture and date div */}
             <div>
                 {/* picture div */}
-                <div className="min-h-[10rem] bg-gray-200 dark:bg-white-700 rounded-t-lg">
+                <div className="min-h-[10rem] bg-gray-200 dark:bg-white-700  rounded-t-lg">
                     <a href={event.apiEventUrlPage} target="_blank" rel="noopener noreferrer">
                         {event.imageUrl
                             ?
@@ -74,10 +75,10 @@ const EventCard = ({ event }) => {
             </div>
 
             {isPopupOpen && (
-                <FavoriteEventPopup event={event} onClose={handleClosePopup} />
+                <LandingPageEventPopup event={event} onClose={handleClosePopup} />
             )}
         </div>
     );
 }
 
-export default EventCard
+export default LandingPageEventCard
