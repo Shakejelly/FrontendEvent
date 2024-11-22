@@ -7,11 +7,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        Flesh: '#CE9F9F',
-        DarkPurple: '#71546B',
+        Flesh: '#FEF3E2',
+        BrightOrange: '#FAB12F',
+        BloodOrange: '#FA812F',
+        Red: '#FA4032'
       },
       fontFamily: {
+        'quicksand': ['Quicksand', 'sans-serif'],
         'mplus': ['"M PLUS Rounded 1c"', 'sans-serif'],
+        'bebas': ['"Bebas Neue"', 'cursive'],
       }
     },
   },
