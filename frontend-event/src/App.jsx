@@ -56,8 +56,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<MainLayout />}>
             <Route path="/register" element={<Register />} />
-            <Route path="/user" element={<UserPage />} />
-            <Route path="/user/:userId" element={<UserPage />} /> {/*Borde ha en sån länk för att hämta userId när user loggas in */}
+            <Route path="/user/:userId" element={<UserPage />} />
             <Route path="/MockMenu" element={<div>Mock Menu Content</div>} />
             <Route path="/events" element={<EventPage />} />
             <Route path="/allfriends" element={<FriendsAll />} />

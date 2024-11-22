@@ -15,15 +15,15 @@ const FriendBox = ({ friends, friendReq }) => {
                     <div className="flex items-center">
                         <p className="text-x font-semibold text-gray-800 mr-1">{friends.length} Friends</p>
                         {/* This div will contain incoming friendship requests. */}
-                        <FRequestNoti friendReq={friendReq} />
+                        {friendReq.length > 0 && (<FRequestNoti friendReq={friendReq} />)}
                     </div>
 
                     {/*Show all friends button*/}
-                    <div>
+                    {friends.length > 4 && (<div>
                         <Link to="/allfriends" state={friends} className='hover:text-white'>
                             Show All
                         </Link>
-                    </div>
+                    </div>)}
                 </div>
 
                 {/* friend box with friend showing */}

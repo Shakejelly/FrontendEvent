@@ -25,9 +25,10 @@ const Login = () => {
         password: password,
       });
       console.log(response);
-
+      const userId = response.data.userId;
       const token = response.data.token;
       localStorage.setItem("token", token);
+      localStorage.setItem("userId", userId);
       console.log(token);
 
       const decodedToken = jwtDecode(token);
@@ -41,7 +42,7 @@ const Login = () => {
       if (userRole === "Admin") {
         navigate("/admin");
       } else if (userRole === "User") {
-        navigate("/user");
+        navigate(`/user/${userId}`);
       } else {
         setError("Okänd roll");
       }
@@ -92,9 +93,8 @@ const Login = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className={`w-full py-2 mb-4 text-white rounded-lg ${
-              isLoading ? "bg-gray-400" : "bg-[#CE9F9F] hover:bg-opacity-90"
-            }`}
+            className={`w-full py-2 mb-4 text-white rounded-lg ${isLoading ? "bg-gray-400" : "bg-[#CE9F9F] hover:bg-opacity-90"
+              }`}
           >
             {isLoading ? "Loggar in..." : "Login"}
           </button>

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 function SideMenuLayout({ buttons }) {
     const [isOpen, setIsOpen] = useState(false);
+    const userId = localStorage.getItem("userId");
 
     const handlers = useSwipeable({
         onSwipedLeft: () => {
@@ -30,14 +31,14 @@ function SideMenuLayout({ buttons }) {
                         <button className="bg-Flesh shadow-[inset_0_-1px_2px_rgba(0,0,0,0.6)] 
                         hover:bg-red-200 hover:shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] 
                         text-white w-full mb- py-2 px-1 rounded text-[1.2rem]">
-                            <Link to="/user" className='hover:text-white'>Profile</Link>
+                            <Link to={`/user/${userId}`} className='hover:text-white'>Profile</Link>
                         </button>
                         {buttons.map((button, index) => (
                             <button
                                 key={index}
                                 className={`${button.className} w-full mb- py-2 px-1 rounded`}
                                 onClick={button.onClick}
-                                style={{ fontSize: '1.2rem' }} /* För att ändra textstorlek*/
+                                style={{ fontSize: '1.2rem' }}
                             >
                                 {button.label}
                             </button>
@@ -48,18 +49,7 @@ function SideMenuLayout({ buttons }) {
                             <Link to="/aboutus">About us</Link>
                         </button>
                     </div>
-                    {/* <div className='sidebar_footer flex p-1 '>
-                        <div className='sidebar_settings #CE9F9F p-1 bg-red-200 shadow-[inset_0_-1px_2px_rgba(0,0,0,0.6)] hover:bg-red-200 hover:shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] text-white h-full' onClick={e => e.stopPropagation()}>
-                            <button className='sidebar_settings_button'> Settings
-                            </button>
-
-                        </div>
-                        <div className='sidebar_info flex rounded-full h-10 w-10 #CE9F9F p-1 bg-red-200 shadow-[inset_0_-1px_2px_rgba(0,0,0,0.6)] hover:bg-red-200 hover:shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] text-white h-full'>
-                            <button>i</button>
-                        </div>
-                    </div> */}
                 </div>)}
-
         </div>
     );
 }
