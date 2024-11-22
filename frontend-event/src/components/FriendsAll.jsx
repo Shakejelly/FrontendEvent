@@ -5,7 +5,6 @@ const FriendsAll = () => {
     // using 'uselocation' to fetch 'friends' from parent komponent
     const location = useLocation();
     const friends = location.state || [];
-    const userId = localStorage.getItem("userId");
 
     return (
         <>
