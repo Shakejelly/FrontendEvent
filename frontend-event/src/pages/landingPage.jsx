@@ -11,6 +11,10 @@ const LandingPage = () => {
         navigate('/login')
     }
 
+    const handleEventsRedirect = () => {
+        navigate('/events')
+    }
+
     return (
         <div className="min-h-screen bg-[#71546B] flex flex-col text-center">
             {/* Header Section */}
@@ -44,10 +48,16 @@ const LandingPage = () => {
                 <LandingPageEvents />
             </div>
             <div className="mb-6 flex flex-col gap-4 w-full px-6">
-                <button onClick={handleLoginRedirect} className="bg-white text-[#71546B] sm:w-full md:w-96 md:m-auto py-3 rounded-lg font-semibold border-2 border-[#71546B] hover:bg-[#f4e4e4] transition">
-                    Kom igång
+                <button onClick={handleEventsRedirect} className="bg-white text-[#71546B] sm:w-full md:w-96 md:m-auto py-3 rounded-lg font-semibold border-2 border-[#71546B] hover:bg-[#f4e4e4] transition">
+                    Se Alla Events
                 </button>
             </div>
+            <div className="mb-6 flex flex-col gap-4 w-full px-6">
+                <button onClick={handleLoginRedirect} className="bg-white text-[#71546B] sm:w-full md:w-96 md:m-auto py-3 rounded-lg font-semibold border-2 border-[#71546B] hover:bg-[#f4e4e4] transition">
+                    Logga In/Skapa Konto
+                </button>
+            </div>
+
         </div>
     );
 };
