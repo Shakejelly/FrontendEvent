@@ -4,13 +4,18 @@ import axios from 'axios';
 import FriendBox from '../components/FriendBox';
 import { useNavigate, useParams } from 'react-router-dom';
 import FavoriteBox from '../components/FavoriteBox';
+import { jwtDecode } from 'jwt-decode';
 
 const UserPage = () => {
     const [user, setUser] = useState(null);
     const [friends, setFriends] = useState([]);
     const [friendReq, setFriendReq] = useState([])
     const navigate = useNavigate();
-    const { userId } = useParams();
+
+    const token = localStorage.getItem("token");
+    const decodedToken = jwtDecode(token);
+    const theId = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
+    const userId = decodedToken[theId]
 
     useEffect(() => {
         const getUser = async () => {

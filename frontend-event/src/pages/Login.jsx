@@ -25,10 +25,9 @@ const Login = () => {
         password: password,
       });
       console.log(response);
-      const userId = response.data.userId;
+
       const token = response.data.token;
       localStorage.setItem("token", token);
-      localStorage.setItem("userId", userId);
       console.log(token);
 
       const decodedToken = jwtDecode(token);
@@ -37,12 +36,13 @@ const Login = () => {
       const roleKey =
         "http://schemas.microsoft.com/ws/2008/06/identity/claims/role";
       const userRole = decodedToken[roleKey];
-      console.log(userRole);
+
+      console.log('userRole', userRole);
 
       if (userRole === "Admin") {
         navigate("/admin");
       } else if (userRole === "User") {
-        navigate(`/user/${userId}`);
+        navigate("/user/");
       } else {
         setError("Okänd roll");
       }
