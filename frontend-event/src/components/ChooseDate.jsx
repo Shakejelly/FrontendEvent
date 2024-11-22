@@ -23,7 +23,7 @@ const ChooseDate = ({ onDateSelect }) => {
     };
 
     return (
-        <div className="fixed bg-gray-500 w-auto p-2 mt-4 mb-12 mr-4 rounded-full right-0 flex justify-center items-center">
+        <div className="fixed bg-gray-500 w-auto p-2 my-2 mr-4 rounded-full right-0 flex justify-center items-center">
             <button
                 onClick={handleDatePopup}
                 className="inline-flex items-center text-lg font-medium text-black"
