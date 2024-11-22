@@ -40,7 +40,7 @@ const UserPage = () => {
 
     return (
         <>
-            <div className='ml-11 userPage min-h-screen bg-DarkPurple flex justify-center item-center'>
+            <div className='userPage min-h-screen bg-DarkPurple flex justify-center item-center'>
 
                 {/* container for welcome,profPic, friendContainer */}
                 <div className="flex flex-col justify-top items-center mt-4 space-y-4">

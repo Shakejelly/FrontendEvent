@@ -55,7 +55,7 @@ const EventCard = ({ event }) => {
                 {/* title div */}
                 <div className='w-auto h-[3rem] mb-2'>
                     <a href="#">
-                        <h6 className="mb-2 text-xl font-bold tracking-tight text-gray-700 dark:text-white">{event.title}</h6>
+                        <h6 className="mb-2 text-xl font-bold tracking-tight text-gray-700 dark:text-white truncate">{event.title}</h6>
                     </a>
                 </div>
                 {/* venue & city div */}

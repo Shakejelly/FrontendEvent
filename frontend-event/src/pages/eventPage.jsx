@@ -11,6 +11,7 @@ const EventPage = () => {
     const [error, setError] = useState(null);
     const [page, setPage] = useState(1);
     const [selectedDate, setSelectedDate] = useState(null);
+    const [favoriteEvents, setFavoriteEvents] = useState([]);
 
     const eventsPerPage = 10;
 
@@ -44,7 +45,7 @@ const EventPage = () => {
                     imageUrl: normalizeImageUrl(event.imageUrl),
                 }));
 
-                console.log("All Events with Normalized URLs:", allEvents);
+
 
                 // Sort and remove duplicates
                 const sortedEvents = allEvents.sort((a, b) => {
@@ -106,6 +107,18 @@ const EventPage = () => {
         });
     };
 
+    const handleFavoriteToggle = (eventId, isFavorite) => {
+        if (isFavorite) {
+            // Add event to favorites
+            setFavoriteEvents((prevFavorites) => [...prevFavorites, eventId]);
+        } else {
+            // Remove event from favorites
+            setFavoriteEvents((prevFavorites) =>
+                prevFavorites.filter((id) => id !== eventId)
+            );
+        }
+    };
+
     // Paginate the events based on the current page
     useEffect(() => {
         const startIndex = (page - 1) * eventsPerPage;
@@ -121,7 +134,7 @@ const EventPage = () => {
 
             <div className="min-h-screen pt-6  bg-DarkPurple flex flex-col align-middle justify-evenly content-evenly">
                 {displayedEvents.map((event) => (
-                    <EventCard key={event.eventId} event={event} />
+                    <EventCard key={event.eventId} event={event} onFavoriteToggle={handleFavoriteToggle} />
                 ))}
 
                 {loading && (

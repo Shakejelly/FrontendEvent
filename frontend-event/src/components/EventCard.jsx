@@ -7,11 +7,54 @@ const EventCard = ({ event, onFavoriteToggle }) => {
 
     const currentDate = new Date();
 
+    const userId = localStorage.getItem("userId");
+    const addEventToUserEndpoint = `https://localhost:7261/api/User/${userId}/event`;
+
+
     const futureDates = event.dates.filter(date => new Date(date) > currentDate)
 
-    const handleFavoriteClick = () => {
+    const handleFavoriteToggle = async () => {
         setIsFavorite(!isFavorite);
         onFavoriteToggle(event.id, !isFavorite); // Optionally, notify parent component
+
+        const eventToAdd = {
+            eventId: event.eventId,   // Use event's ID
+            category: event.category, // Use event's category
+            title: event.title,       // Use event's title
+            description: event.description,  // Use event's description
+            imageUrl: event.imageUrl,  // Use event's image URL
+            apiEventUrlPage: event.apiEventUrlPage, // Use event's URL
+            eventUrlPage: event.eventUrlPage,  // Use event's page URL
+            date: event.dates[0],         // Use the first date in the dates array
+            ticketsRelease: event.ticketsRelease,  // Use event's ticket release
+            highestPrice: event.highestPrice,    // Use event's highest price
+            lowestPrice: event.lowestPrice,      // Use event's lowest price
+            venue: {
+                name: event.venue.name,       // Use venue's name
+                address: event.venue.address, // Use venue's address
+                zipCode: event.venue.zipCode, // Use venue's zip code
+                city: event.venue.city,       // Use venue's city
+                locationLat: event.venue.locationLat,  // Use venue's latitude
+                locationLong: event.venue.locationLong,  // Use venue's longitude
+            }
+        };
+
+        try {
+            const response = await fetch(addEventToUserEndpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(eventToAdd)
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to add event');
+            } console.log("Event successfully added to user")
+        } catch (error) {
+            console.error('error adding event to use', error)
+        }
+
     };
 
     const dateDisplay = futureDates.length > 1
@@ -73,7 +116,7 @@ const EventCard = ({ event, onFavoriteToggle }) => {
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                         </svg>
                     </button>
-                    <button onClick={handleFavoriteClick}>
+                    <button onClick={handleFavoriteToggle}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
