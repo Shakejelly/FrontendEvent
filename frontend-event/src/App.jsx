@@ -5,8 +5,10 @@ import EventPage from "./pages/EventPage";
 import UserPage from "./pages/UserPage";
 import FriendsAll from "./components/FriendsAll";
 import EditProfile from "./components/EditProfile";
+import { Link } from "react-router-dom";
+import LandingPage from './pages/LandingPage'
+import AdminPage from "./pages/adminPage";
 import AboutUs from "./components/AboutUs";
-import LandingPage from "./pages/LandingPage"
 import HamburgerLayout from "./components/HamburgerLayout"; // New layout component
 
 function App() {
