@@ -20,7 +20,8 @@ const HamburgerMenu = () => {
                 </button>
             </div>
             <div
-                className={`overflow-hidden transition-[max-height] duration-300 ease-in-out ${isOpen ? "min-h-44" : "max-h-0"}`}
+                className={`transition-[max-height,opacity] duration-300 ease-in-out overflow-hidden ${isOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
+                    }`}
             >
                 <ul className="bg-inherit px-4 py-2 space-y-2">
                     <li>
