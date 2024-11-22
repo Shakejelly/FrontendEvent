@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import EventCard from "../components/EventCard";
 import ChooseDateButton from "../components/ChooseDate";
 import ReactPaginate from "react-paginate";
+import { jwtDecode } from 'jwt-decode';
 
 const EventPage = () => {
     const [events, setEvents] = useState([]);
@@ -12,6 +13,9 @@ const EventPage = () => {
     const [page, setPage] = useState(1);
     const [selectedDate, setSelectedDate] = useState(null);
     const [favoriteEvents, setFavoriteEvents] = useState([]);
+
+
+
 
     const eventsPerPage = 10;
 

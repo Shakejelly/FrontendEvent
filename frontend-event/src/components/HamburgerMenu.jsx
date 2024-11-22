@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/HappeningNavbarLogo.png";
 
+
 const HamburgerMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -26,7 +27,7 @@ const HamburgerMenu = () => {
                 <ul className="bg-inherit px-4 py-2 space-y-2">
                     <li>
                         <Link
-                            to={`/user/${userId}`}
+                            to={`/user`}
                             className="block bg-gray-200 hover:bg-gray-300 text-black font-semibold py-1 px-4 rounded-md shadow-sm transition-colors duration-200 text-center max-w-[90%] mx-auto"
                             onClick={() => setIsOpen(!isOpen)}
                             aria-label="Toggle menu"

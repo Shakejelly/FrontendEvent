@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import EventDetailsPopup from './EventDetailsPopup';
+import { jwtDecode } from 'jwt-decode';
 
 const EventCard = ({ event, onFavoriteToggle }) => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -7,7 +8,10 @@ const EventCard = ({ event, onFavoriteToggle }) => {
 
     const currentDate = new Date();
 
-    const userId = localStorage.getItem("userId");
+    const token = localStorage.getItem("token");
+    const decodedToken = jwtDecode(token);
+    const theId = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
+    const userId = decodedToken[theId]
     const addEventToUserEndpoint = `https://localhost:7261/api/User/${userId}/event`;
 
 
