@@ -14,7 +14,7 @@ import FriendsAll from "./components/FriendsAll";
 import EditProfile from "./components/EditProfile";
 import { Link } from "react-router-dom";
 import LandingPage from './pages/LandingPage'
-
+import AdminPage from "./pages/adminPage";
 import AboutUs from "./components/AboutUs";
 
 
@@ -61,6 +61,7 @@ function App() {
             <Route path="/events" element={<EventPage />} />
             <Route path="/allfriends" element={<FriendsAll />} />
             <Route path="/editprofile" element={<EditProfile />} />
+            <Route path="/admin" element={<AdminPage/>} />
             <Route path="/aboutus" element={<AboutUs />} />
           </Route>
         </Routes>
