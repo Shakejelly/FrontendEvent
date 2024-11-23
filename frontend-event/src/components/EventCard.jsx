@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import EventDetailsPopup from './EventDetailsPopup';
 import { jwtDecode } from 'jwt-decode';
 
-const EventCard = ({ event, onFavoriteToggle }) => {
+const EventCard = ({ event, favorites, onFavoriteToggle }) => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [isFavorite, setIsFavorite] = useState(false);
 
@@ -13,52 +13,77 @@ const EventCard = ({ event, onFavoriteToggle }) => {
     const theId = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
     const userId = decodedToken[theId]
     const addEventToUserEndpoint = `https://localhost:7261/api/User/${userId}/event`;
-
+    const removeEventFromuser = `https://localhost:7261/api/User/${userId}/event/${event.id}`
 
     const futureDates = event.dates.filter(date => new Date(date) > currentDate)
 
+    useEffect(() => {
+        // Check if the event is in the favorites array
+        setIsFavorite(favorites.some(favoriteEvent => favoriteEvent.eventId === event.eventId));
+    }, [favorites, event.eventId]); // Re-run when favorites or eventId change
+
     const handleFavoriteToggle = async () => {
         setIsFavorite(!isFavorite);
-        onFavoriteToggle(event.id, !isFavorite); // Optionally, notify parent component
+
+        onFavoriteToggle(event.id, !isFavorite);
 
         const eventToAdd = {
-            eventId: event.eventId,   // Use event's ID
-            category: event.category, // Use event's category
-            title: event.title,       // Use event's title
-            description: event.description,  // Use event's description
-            imageUrl: event.imageUrl,  // Use event's image URL
-            apiEventUrlPage: event.apiEventUrlPage, // Use event's URL
-            eventUrlPage: event.eventUrlPage,  // Use event's page URL
-            date: event.dates[0],         // Use the first date in the dates array
-            ticketsRelease: event.ticketsRelease,  // Use event's ticket release
-            highestPrice: event.highestPrice,    // Use event's highest price
-            lowestPrice: event.lowestPrice,      // Use event's lowest price
+            eventId: event.eventId,
+            category: event.category,
+            title: event.title,
+            description: event.description,
+            imageUrl: event.imageUrl,
+            apiEventUrlPage: event.apiEventUrlPage,
+            eventUrlPage: event.eventUrlPage,
+            date: event.dates[0],
+            ticketsRelease: event.ticketsRelease,
+            highestPrice: event.highestPrice,
+            lowestPrice: event.lowestPrice,
             venue: {
-                name: event.venue.name,       // Use venue's name
-                address: event.venue.address, // Use venue's address
-                zipCode: event.venue.zipCode, // Use venue's zip code
-                city: event.venue.city,       // Use venue's city
-                locationLat: event.venue.locationLat,  // Use venue's latitude
-                locationLong: event.venue.locationLong,  // Use venue's longitude
+                name: event.venue.name,
+                address: event.venue.address,
+                zipCode: event.venue.zipCode,
+                city: event.venue.city,
+                locationLat: event.venue.locationLat,
+                locationLong: event.venue.locationLong,
             }
         };
 
         try {
-            const response = await fetch(addEventToUserEndpoint, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(eventToAdd)
-            });
+            if (isFavorite) {
+                // Remove event from favorites
+                const favoriteEvent = favorites.find(favEvent => favEvent.eventId === event.eventId);
 
-            if (!response.ok) {
-                throw new Error('Failed to add event');
-            } console.log("Event successfully added to user")
+                const response = await fetch(`https://localhost:7261/api/User/${userId}/event/${favoriteEvent.id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to remove event from user');
+                }
+                console.log("Event successfully removed from user");
+            } else {
+                // Add event to favorites
+                const response = await fetch(`https://localhost:7261/api/User/${userId}/event`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(eventToAdd)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to add event');
+                }
+                console.log("Event successfully added to user");
+
+            }
         } catch (error) {
-            console.error('error adding event to use', error)
+            console.error('Error handling favorite toggle:', error);
         }
-
     };
 
     const dateDisplay = futureDates.length > 1
@@ -124,8 +149,8 @@ const EventCard = ({ event, onFavoriteToggle }) => {
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
-                            fill={isFavorite ? "yellow" : "none"} // Fill the star with yellow if favorite
-                            stroke={isFavorite ? "yellow" : "black"} // Outline the star in yellow if favorite
+                            fill={isFavorite ? "yellow" : "none"}
+                            stroke={isFavorite ? "yellow" : "black"}
                             strokeWidth="2"
                             className="w-6 h-6 cursor-pointer"
                         >

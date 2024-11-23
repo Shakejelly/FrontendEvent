@@ -14,8 +14,10 @@ const EventPage = () => {
     const [selectedDate, setSelectedDate] = useState(null);
     const [favoriteEvents, setFavoriteEvents] = useState([]);
 
-
-
+    const token = localStorage.getItem("token");
+    const decodedToken = jwtDecode(token);
+    const theId = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
+    const userId = decodedToken[theId]
 
     const eventsPerPage = 10;
 
@@ -29,6 +31,21 @@ const EventPage = () => {
         }
         return url;
     };
+
+
+
+    useEffect(() => {
+        const fetchUserFavoriteEvents = async () => {
+            try {
+                const response = await axios.get(`https://localhost:7261/api/User/${userId}/event`)
+                setFavoriteEvents(response.data)
+            } catch (error) {
+                console.error('Error fetching favorite events:', error);
+                setError('Error fetching favorite events');
+            }
+        }
+        fetchUserFavoriteEvents();
+    }, [])
 
     // Fetch events from both APIs with pagination
     useEffect(() => {
@@ -138,7 +155,7 @@ const EventPage = () => {
 
             <div className="min-h-screen pt-6  bg-DarkPurple flex flex-col align-middle justify-evenly content-evenly">
                 {displayedEvents.map((event) => (
-                    <EventCard key={event.eventId} event={event} onFavoriteToggle={handleFavoriteToggle} />
+                    <EventCard key={event.eventId} event={event} onFavoriteToggle={handleFavoriteToggle} favorites={favoriteEvents} />
                 ))}
 
                 {loading && (
