@@ -17,7 +17,7 @@ const EventPage = () => {
 
 
 
-    const eventsPerPage = 10;
+    const eventsPerPage = 7;
 
     const ticketMasterEndpoint = 'https://localhost:7261/TicketMasterAPI/getEvents';
     const visitStockholmEndpoint = 'https://localhost:7261/VisitStockholmAPI/getEvents';
@@ -131,8 +131,8 @@ const EventPage = () => {
     }, [page, events]);
 
     return (
-        <main className="bg-DarkPurple">
-            <div className="-z-20">
+        <main className="pb-20">
+            <div className="">
                 <ChooseDateButton onDateSelect={handleDateSelect} />
             </div>
 
@@ -154,14 +154,16 @@ const EventPage = () => {
                     pageRangeDisplayed={3} // Number of pages to show in pagination
                     marginPagesDisplayed={1} // Number of pages to show on either side of the current page
                     onPageChange={handlePageChange}
-                    pageClassName="px-1 border-2 rounded-lg "
-                    containerClassName="pagination flex justify-center mt-8 border-black bg-white py-4 text-l "
+                    pageClassName="px-1 border-2 rounded-lg"
+                    containerClassName="pagination fixed bottom-0 left-0 right-0 flex justify-center mt-4 border-black bg-white py-4 text-l z-10"
                     activeClassName="bg-DarkPurple text-white rounded-lg"
-                    previousLabel="Previous "
+                    previousLabel="Previous"
                     nextLabel="Next"
                     previousClassName="px-1 border-2 rounded-lg"
-                    nextClassName='px-1 border-2 rounded-lg'
+                    nextClassName="px-1 border-2 rounded-lg"
                 />
+
+
             </div>
         </main>
     );

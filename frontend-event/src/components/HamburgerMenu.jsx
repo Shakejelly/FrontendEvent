@@ -1,12 +1,45 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/HappeningNavbarLogo.png";
+import { jwtDecode } from "jwt-decode";
+import axios from "axios";
 
 
 const HamburgerMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const userId = localStorage.getItem("userId");
+
+    const navigate = useNavigate(); // Use useNavigate here
+
+    const token = localStorage.getItem("token");
+    const decodedToken = jwtDecode(token);
+    const theId = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
+    const userId = decodedToken[theId];
+
+    const handleLogOut = async () => {
+        try {
+            // Sending the POST request to logout the user
+            const response = await axios.post("https://localhost:7261/api/Auth/logout", {}, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`, // Pass the token if needed
+                },
+            });
+
+            // Assuming response is successful, you can clear localStorage
+            localStorage.removeItem("token");
+
+            // Optionally, clear any other user-related data from the app state or context here
+
+            // Redirect to the homepage
+            navigate("/");
+
+        } catch (error) {
+            console.error("Logout failed:", error);
+            // You can optionally show a message to the user if the logout fails
+            alert("An error occurred while logging out. Please try again.");
+        }
+    };
+
 
     return (
         <nav className="bg-Flesh text-black shadow-md">
@@ -57,9 +90,9 @@ const HamburgerMenu = () => {
                     </li>
                     <li>
                         <Link
-                            to="/start"
+                            to="/"
                             className="block bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-4 rounded-md shadow-sm transition-colors duration-200 text-center max-w-[90%] mx-auto"
-                            onClick={() => setIsOpen(!isOpen)}
+                            onClick={handleLogOut}
                             aria-label="Toggle menu"
                         >
                             Logga Ut
