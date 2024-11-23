@@ -57,7 +57,7 @@ const HamburgerMenu = () => {
                     </li>
                     <li>
                         <Link
-                            to="/start"
+                            to="/"
                             className="block bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-4 rounded-md shadow-sm transition-colors duration-200 text-center max-w-[90%] mx-auto"
                             onClick={() => setIsOpen(!isOpen)}
                             aria-label="Toggle menu"
