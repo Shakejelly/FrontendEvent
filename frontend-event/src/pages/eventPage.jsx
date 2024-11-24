@@ -62,15 +62,23 @@ const EventPage = () => {
                     imageUrl: normalizeImageUrl(event.imageUrl),
                 }));
 
+                // Filter out events with passed dates
+                const today = new Date();
+                allEvents = allEvents.filter((event) =>
+                    event.dates.some((eventDateString) => {
+                        const eventDate = new Date(eventDateString);
+                        return eventDate >= today; // Keep only events with future or current dates
+                    })
+                );
 
-
-                // Sort and remove duplicates
+                // Sort the events by date
                 const sortedEvents = allEvents.sort((a, b) => {
                     const dateA = new Date(a.dates[0]);
                     const dateB = new Date(b.dates[0]);
                     return dateA - dateB;
                 });
 
+                // Remove duplicates
                 const seen = new Set();
                 const uniqueEvents = sortedEvents.filter((event) => {
                     const uniqueKey = `${event.name}-${event.dates[0]}-${event.location}`;
@@ -94,6 +102,7 @@ const EventPage = () => {
 
         fetchEvents();
     }, []); // Empty array to only run once on mount
+
 
     // Handle date selection and filter events
     const handleDateSelect = (date) => {
