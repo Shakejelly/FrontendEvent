@@ -46,7 +46,7 @@ const GuestEventCard = ({ event }) => {
             <div className="p-5">
                 <p className="mb-3 font-normal text-black-700 dark:text-black-400">{dateDisplay}</p>
                 <a href="#">
-                    <h6 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{event.title}</h6>
+                    <h6 className="mb-2 text-2xl font-bold tracking-tight text-black">{event.title}</h6>
                 </a>
                 <p className="mb-4">{event.venue.name} {event.venue.city}</p>
                 <div className="flex justify-between">

@@ -15,7 +15,7 @@ const LandingPage = () => {
     }
 
     return (
-        <div className="min-h-screen bg-[#71546B] flex flex-col text-center">
+        <div className="min-h-screen bg-BloodOrange flex flex-col text-center">
             {/* Header Section */}
             <div className="bg-[url('https://images.pexels.com/photos/1047442/pexels-photo-1047442.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')] 
   p-4 shadow-lg sm:w-[80%] m-auto   h-[500px] bg-cover flex flex-col justify-center ">

@@ -10,6 +10,7 @@ export default {
         Flesh: '#FEF3E2',
         BrightOrange: '#FAB12F',
         BloodOrange: '#FA812F',
+        DarkPurple: '#FA812F',
         Red: '#FA4032'
       },
       fontFamily: {

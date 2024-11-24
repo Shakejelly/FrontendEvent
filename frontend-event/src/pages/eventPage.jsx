@@ -145,11 +145,11 @@ const EventPage = () => {
 
     return (
         <main className="pb-20">
-            <div className="">
+            <div>
                 <ChooseDateButton onDateSelect={handleDateSelect} />
             </div>
 
-            <div className="min-h-screen pt-6  bg-DarkPurple flex flex-col align-middle justify-evenly content-evenly">
+            <div className="min-h-screen pt-6 flex dark:text-black flex-col align-middle justify-evenly content-evenly">
                 {displayedEvents.map((event) => (
                     userType === "guest" ? (
                         <GuestEventCard key={event.eventId} event={event} />
