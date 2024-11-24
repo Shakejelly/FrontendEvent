@@ -87,7 +87,7 @@ const HamburgerMenu = () => {
                             </Link>
                         </li>
                     )}
-                    {userRoll === "Admin" && userRoll === "User" && (
+                    {(userRoll === "Admin" || userRoll === "User") && (
                         <li>
                             <Link
                                 to={`/user`}
@@ -119,7 +119,7 @@ const HamburgerMenu = () => {
                             Om Oss
                         </Link>
                     </li>
-                    {userRoll === "Admin" && userRoll === "User" && (
+                    {(userRoll === "Admin" || userRoll === "User") && (
                         <li>
                             <Link
                                 to="/"
@@ -136,14 +136,13 @@ const HamburgerMenu = () => {
                             <Link
                                 to="/"
                                 className="block bg-gray-200 hover:bg-gray-300 text-black font-semibold py-1 px-4 rounded-md shadow-sm transition-colors duration-200 text-center max-w-[90%] mx-auto"
-
                             >
                                 Startsida
                             </Link>
                         </li>
                     )}
-
                 </ul>
+
             </div>
         </nav>
     );
