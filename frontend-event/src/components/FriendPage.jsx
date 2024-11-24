@@ -40,7 +40,9 @@ const FriendPage = () => {
         getUser();
     }, [userId]);
 
+    // checks if user has sent request, is friend or is not a friend
     const isFriend = friends.some(friend => friend.id === inloggedUserId);
+    const hasSentRequest = friendReq.some(request => request.friendId === inloggedUserId);
 
     return (
         <>
@@ -64,6 +66,12 @@ const FriendPage = () => {
                                 rounded-lg hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-blue-300 dark:purpleContrast 
                                 dark:hover:bg-blue-700 dark:focus:ring-white-800 mb-1">
                                 Följer
+                            </button>
+                        ) : hasSentRequest ? (
+                            <button
+                                className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-gray-500 bg-gray-300 
+                                rounded-lg cursor-not-allowed mb-1">
+                                Förfrågan skickad
                             </button>
                         ) : (
                             <button
