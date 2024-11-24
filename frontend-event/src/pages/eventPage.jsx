@@ -4,6 +4,7 @@ import EventCard from "../components/EventCard";
 import ChooseDateButton from "../components/ChooseDate";
 import ReactPaginate from "react-paginate";
 import { jwtDecode } from 'jwt-decode';
+import GuestEventCard from '../components/GuestEventCard'
 
 const EventPage = () => {
     const [events, setEvents] = useState([]);
@@ -13,9 +14,7 @@ const EventPage = () => {
     const [page, setPage] = useState(1);
     const [selectedDate, setSelectedDate] = useState(null);
     const [favoriteEvents, setFavoriteEvents] = useState([]);
-
-
-
+    const [userType, setUserType] = useState("");
 
     const eventsPerPage = 7;
 
@@ -29,6 +28,20 @@ const EventPage = () => {
         }
         return url;
     };
+
+    useEffect(() => {
+        const checkForUser = () => {
+            const token = localStorage.getItem("token");
+
+            if (token === null) {
+                setUserType("guest");
+            } else {
+                setUserType("user")
+            }
+        }
+
+        checkForUser();
+    }, [])
 
     // Fetch events from both APIs with pagination
     useEffect(() => {
@@ -138,7 +151,15 @@ const EventPage = () => {
 
             <div className="min-h-screen pt-6  bg-DarkPurple flex flex-col align-middle justify-evenly content-evenly">
                 {displayedEvents.map((event) => (
-                    <EventCard key={event.eventId} event={event} onFavoriteToggle={handleFavoriteToggle} />
+                    userType === "guest" ? (
+                        <GuestEventCard key={event.eventId} event={event} />
+                    ) : (
+                        <EventCard
+                            key={event.eventId}
+                            event={event}
+                            onFavoriteToggle={handleFavoriteToggle}
+                        />
+                    )
                 ))}
 
                 {loading && (

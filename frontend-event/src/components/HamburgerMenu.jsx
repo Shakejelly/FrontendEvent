@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/HappeningNavbarLogo.png";
 import { jwtDecode } from "jwt-decode";
@@ -7,30 +7,37 @@ import axios from "axios";
 
 const HamburgerMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [userId, setUserId] = useState("");
 
+    const navigate = useNavigate();
 
-    const navigate = useNavigate(); // Use useNavigate here
+    useEffect(() => {
+        const checkForUser = () => {
+            const token = localStorage.getItem("token");
 
-    const token = localStorage.getItem("token");
-    const decodedToken = jwtDecode(token);
-    const theId = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
-    const userId = decodedToken[theId];
+            if (token === null) {
+                setUserId("guest");
+            } else {
+                const decodedToken = jwtDecode(token);
+                const theId = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
+                setUserId(decodedToken[theId])
+            }
+        }
+
+        checkForUser();
+    }, [])
 
     const handleLogOut = async () => {
         try {
             // Sending the POST request to logout the user
             const response = await axios.post("https://localhost:7261/api/Auth/logout", {}, {
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem("token")}`, // Pass the token if needed
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`,
                 },
             });
 
-            // Assuming response is successful, you can clear localStorage
             localStorage.removeItem("token");
-
-            // Optionally, clear any other user-related data from the app state or context here
-
-            // Redirect to the homepage
+            alert("Du loggas nu ut");
             navigate("/");
 
         } catch (error) {

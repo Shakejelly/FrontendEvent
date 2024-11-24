@@ -14,6 +14,7 @@ const EventCard = ({ event, onFavoriteToggle }) => {
     const decodedToken = jwtDecode(token);
     const theId = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier";
     const userId = decodedToken[theId];
+
     const addEventToUserEndpoint = `https://localhost:7261/api/User/${userId}/event`;
     const removeEventFromuser = `https://localhost:7261/api/User/${userId}/event/${event.id}`;
 
