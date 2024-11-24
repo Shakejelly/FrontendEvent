@@ -115,13 +115,13 @@ const Login = () => {
               Glömt lösenord
             </button>
           </div>
-          <button
+          {/* <button
             type="button"
             onClick={handleGoogleLogin}
             className="w-full px-4 py-2 text-DarkPurple border border-DarkPurple rounded-lg hover:bg-DarkPurple hover:text-white"
           >
             Logga in med Google
-          </button>
+          </button> */}
         </form>
       )}
 

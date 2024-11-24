@@ -32,11 +32,7 @@ const ForgotPassword = () => {
             });
 
             if (response.ok) {
-                const data = await response.json();
-                console.log('API Response:', data); // Debugging
-                setMessage(data.message || 'Success, but no message returned from the server.');
-
-                // Navigate to login after a success
+                setMessage("An email has been sent to your email address")
                 setTimeout(() => navigate('/login'), 2000); // Optional delay
             } else {
                 const errorData = await response.json();
