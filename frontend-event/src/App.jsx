@@ -10,6 +10,7 @@ import LandingPage from './pages/LandingPage'
 import AdminPage from "./pages/adminPage";
 import AboutUs from "./components/AboutUs";
 import HamburgerLayout from "./components/HamburgerLayout"; // New layout component
+import ForgotPassword from "./pages/ForgotPasswordPage"
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-
+        <Route path="/forgotPassword" element={<ForgotPassword />} />
         {/* Protected Routes (Wrapped in HamburgerLayout) */}
         <Route element={<HamburgerLayout />}>
           <Route path="/admin" element={<AdminPage />} />

@@ -6,14 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 
 const AdminPage = () => {
-  
+
     const [allUsers, setAllUsers] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
         const getAllUsers = async () => {
-            
-                try {
+
+            try {
 
                 const token = localStorage.getItem("token");
 
@@ -38,17 +38,17 @@ const AdminPage = () => {
                 }
 
                 const response = await axios.get(`https://localhost:7261/api/Admin/users`, {
-                    headers: {Authorization: `Bearer ${token}`},
+                    headers: { Authorization: `Bearer ${token}` },
                 });
 
                 if (response.data) {
-                    
+
                     console.log('All users', response)
                     setAllUsers(response.data);
-                } 
-                
+                }
+
                 else {
-                    
+
                     console.log('Couldnt fetch data!', response.data)
                 }
             }
@@ -56,7 +56,7 @@ const AdminPage = () => {
             catch (error) {
                 console.error("Error fetching data", error);
             }
-    
+
         };
 
         getAllUsers();
@@ -86,8 +86,8 @@ const AdminPage = () => {
             <div className='userPage min-h-screen bg-DarkPurple flex justify-center item-center'>
                 <div className="flex flex-col justify-top items-center mt-4 space-y-4 text-center">
                     <strong className="text-xl">Admin settings</strong>
-                
-                    { <AllUsersBox allUsers={allUsers} onDeleteUser={handleDeleteUser}/> }
+
+                    {<AllUsersBox allUsers={allUsers} onDeleteUser={handleDeleteUser} />}
                 </div>
             </div>
         </>

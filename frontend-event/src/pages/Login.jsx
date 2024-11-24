@@ -58,7 +58,7 @@ const Login = () => {
   };
 
   const handleRegisterView = () => setView("register");
-  const handleForgotPasswordView = () => setView("forgotPassword");
+  const handleForgotPasswordView = () => navigate("/forgotPassword")
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-DarkPurple">
