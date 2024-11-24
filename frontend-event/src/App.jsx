@@ -10,6 +10,7 @@ import LandingPage from './pages/LandingPage'
 import AdminPage from "./pages/adminPage";
 import AboutUs from "./components/AboutUs";
 import HamburgerLayout from "./components/HamburgerLayout"; // New layout component
+import FriendPage from "./components/FriendPage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route element={<HamburgerLayout />}>
           <Route path="/events" element={<EventPage />} />
           <Route path="/user" element={<UserPage />} />
+          <Route path="/friend" element={<FriendPage />} />
           <Route path="/allfriends" element={<FriendsAll />} />
           <Route path="/editprofile" element={<EditProfile />} />
           <Route path="/aboutus" element={<AboutUs />} />
