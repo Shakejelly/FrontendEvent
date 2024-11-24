@@ -17,8 +17,8 @@ const HamburgerMenu = () => {
             const token = localStorage.getItem("token");
 
             if (token === null) {
-                setUserId("guest");
-                setUserRoll("guest")
+                setUserId("Guest");
+                setUserRoll("Guest")
             } else {
                 const decodedToken = jwtDecode(token);
                 const theId = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
@@ -87,16 +87,18 @@ const HamburgerMenu = () => {
                             </Link>
                         </li>
                     )}
-                    <li>
-                        <Link
-                            to={`/user`}
-                            className="block bg-gray-200 hover:bg-gray-300 text-black font-semibold py-1 px-4 rounded-md shadow-sm transition-colors duration-200 text-center max-w-[90%] mx-auto"
-                            onClick={() => setIsOpen(!isOpen)}
-                            aria-label="Toggle menu"
-                        >
-                            Profil
-                        </Link>
-                    </li>
+                    {userRoll === "Admin" && userRoll === "User" && (
+                        <li>
+                            <Link
+                                to={`/user`}
+                                className="block bg-gray-200 hover:bg-gray-300 text-black font-semibold py-1 px-4 rounded-md shadow-sm transition-colors duration-200 text-center max-w-[90%] mx-auto"
+                                onClick={() => setIsOpen(!isOpen)}
+                                aria-label="Toggle menu"
+                            >
+                                Profil
+                            </Link>
+                        </li>
+                    )}
                     <li>
                         <Link
                             to="/events"
@@ -117,16 +119,30 @@ const HamburgerMenu = () => {
                             Om Oss
                         </Link>
                     </li>
-                    <li>
-                        <Link
-                            to="/"
-                            className="block bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-4 rounded-md shadow-sm transition-colors duration-200 text-center max-w-[90%] mx-auto"
-                            onClick={handleLogOut}
-                            aria-label="Toggle menu"
-                        >
-                            Logga Ut
-                        </Link>
-                    </li>
+                    {userRoll === "Admin" && userRoll === "User" && (
+                        <li>
+                            <Link
+                                to="/"
+                                className="block bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-4 rounded-md shadow-sm transition-colors duration-200 text-center max-w-[90%] mx-auto"
+                                onClick={handleLogOut}
+                                aria-label="Toggle menu"
+                            >
+                                Logga Ut
+                            </Link>
+                        </li>
+                    )}
+                    {userRoll === "Guest" && (
+                        <li>
+                            <Link
+                                to="/"
+                                className="block bg-gray-200 hover:bg-gray-300 text-black font-semibold py-1 px-4 rounded-md shadow-sm transition-colors duration-200 text-center max-w-[90%] mx-auto"
+
+                            >
+                                Startsida
+                            </Link>
+                        </li>
+                    )}
+
                 </ul>
             </div>
         </nav>

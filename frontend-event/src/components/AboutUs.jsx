@@ -1,7 +1,7 @@
 
 const AboutUs = () => {
     return (
-        <div className='pl-10 w-screen'>
+        <div className='w-screen'>
             <iframe
                 src="https://evabout.azurewebsites.net"
                 className="w-full h-screen border-none"
