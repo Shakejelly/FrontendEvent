@@ -22,6 +22,7 @@ function App() {
 
         {/* Protected Routes (Wrapped in HamburgerLayout) */}
         <Route element={<HamburgerLayout />}>
+          <Route path="/admin" element={<AdminPage />} />
           <Route path="/events" element={<EventPage />} />
           <Route path="/user" element={<UserPage />} />
           <Route path="/allfriends" element={<FriendsAll />} />

@@ -23,8 +23,8 @@ const EventCard = ({ event, onFavoriteToggle }) => {
         const fetchFavorites = async () => {
             try {
                 const response = await axios.get(`https://localhost:7261/api/User/${userId}/event`);
-                const userFavorites = response.data;
-                console.log("Fetched user favorites:", userFavorites);
+                const userFavorites = response.data; console.log
+
                 setFavoriteEvents(userFavorites);
 
                 const isEventFavorite = userFavorites.some(favoriteEvent => favoriteEvent.eventId === event.eventId);

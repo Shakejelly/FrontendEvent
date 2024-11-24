@@ -8,6 +8,7 @@ import axios from "axios";
 const HamburgerMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [userId, setUserId] = useState("");
+    const [userRoll, setUserRoll] = useState();
 
     const navigate = useNavigate();
 
@@ -17,10 +18,18 @@ const HamburgerMenu = () => {
 
             if (token === null) {
                 setUserId("guest");
+                setUserRoll("guest")
             } else {
                 const decodedToken = jwtDecode(token);
                 const theId = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
-                setUserId(decodedToken[theId])
+                const roleClaim = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role";
+                const typeOfUser = decodedToken[roleClaim]
+
+                if (typeOfUser === "Admin") {
+                    setUserRoll("Admin")
+                } else if (typeOfUser === "User") {
+                    setUserRoll("User")
+                }
             }
         }
 
@@ -37,7 +46,7 @@ const HamburgerMenu = () => {
             });
 
             localStorage.removeItem("token");
-            alert("Du loggas nu ut");
+            alert("Du har loggats ut");
             navigate("/");
 
         } catch (error) {
@@ -47,6 +56,7 @@ const HamburgerMenu = () => {
         }
     };
 
+    console.log(userRoll);
 
     return (
         <nav className="bg-Flesh text-black shadow-md">
@@ -65,6 +75,18 @@ const HamburgerMenu = () => {
                     }`}
             >
                 <ul className="bg-inherit px-4 py-2 space-y-2">
+                    {userRoll === "Admin" && (
+                        <li>
+                            <Link
+                                to={`/admin`}
+                                className="block bg-gray-200 hover:bg-gray-300 text-black font-semibold py-1 px-4 rounded-md shadow-sm transition-colors duration-200 text-center max-w-[90%] mx-auto"
+                                onClick={() => setIsOpen(!isOpen)}
+                                aria-label="Toggle menu"
+                            >
+                                Admin
+                            </Link>
+                        </li>
+                    )}
                     <li>
                         <Link
                             to={`/user`}
