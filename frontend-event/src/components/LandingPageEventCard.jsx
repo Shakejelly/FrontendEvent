@@ -70,7 +70,7 @@ const LandingPageEventCard = ({ event }) => {
         {/* title div */}
         <div className="w-auto h-[3rem] mb-2">
           <a href="#">
-            <h6 className="mb-2 text-xl font-bold tracking-tight text-gray-700 dark:text-white truncate">
+            <h6 className="mb-2 text-xl font-bold tracking-tight text-black truncate">
               {event.title}
             </h6>
           </a>
