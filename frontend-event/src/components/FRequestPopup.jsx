@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const FRequestPopup = ({ friendReq, onClose, updateFriendReq }) => {
     const [friends, setFriends] = useState([]);
     const [reqIds, setReqIds] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getFriend = async () => {
@@ -38,6 +40,10 @@ const FRequestPopup = ({ friendReq, onClose, updateFriendReq }) => {
         setReqIds(requIds => requIds.filter(reqId => reqId !== idn));
         updateFriendReq(t => t.filter(req => req.id !== idn))
     }
+
+    const HandleViewFriendPage = (userId) => {
+        navigate('/friend', { state: { userId } })
+    }
     return (
         <>
             <div className="fixed z-30 inset-0 flex items-center justify-center bg-flesh bg-opacity-50 transition-opacity duration-300 ease-out animate-fadeIn">
@@ -55,13 +61,17 @@ const FRequestPopup = ({ friendReq, onClose, updateFriendReq }) => {
 
                     {friends.length > 0 ? (
                         friends.map((friend, index) => (
-                            <div key={index} className="flex items-center shadow-md w-[17rem] transition-transform rounded-md bg-Flesh p-3 mb-3">
-                                <img
-                                    src={friend.profilePictureUrl}
-                                    alt="FriendProfilePicture"
-                                    className="w-12 h-12 rounded-md object-cover border-2 border-purple-500 mr-3"
-                                />
-                                <p className="text-gray-800 flex-1">{friend.firstName} {friend.lastName}</p>
+                            <div key={index}
+                                className="flex items-center shadow-md w-[17rem] transition-transform rounded-md bg-Flesh p-3 mb-3">
+                                <div onClick={() => HandleViewFriendPage(friend.id)} className='cursor-pointer flex space-x-3'>
+                                    <img
+                                        src={friend.profilePictureUrl}
+                                        alt="FriendProfilePicture"
+                                        className="w-12 h-12 rounded-md object-cover border-2 border-purple-500 mr-3"
+                                    />
+                                    <p className="text-gray-800 flex-1">{friend.firstName} {friend.lastName}</p>
+
+                                </div>
                                 <div className="flex space-x-3">
                                     <span onClick={() => acceptHandler(reqIds[index])} className="cursor-pointer text-green-500">✅</span>
                                     <span onClick={() => denyHandler(reqIds[index])} className="cursor-pointer text-red-500">❌</span>
