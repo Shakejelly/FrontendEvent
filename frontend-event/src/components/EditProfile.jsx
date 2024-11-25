@@ -22,11 +22,11 @@ const EditProfile = () => {
             const updateData = { firstName, lastName, nickName, phoneNumber };
             const response = await axios.post(`https://localhost:7261/api/User/UpdateUser?userId=${userId}`, updateData);
             if (response.status == 200) {
-                setSuccessMessage("Succed!");
+                setSuccessMessage("Success!");
                 console.log(errorMessage)
             }
             else {
-                setErrorMessage("Faild to update!")
+                setErrorMessage("Failed to update!")
                 console.log(errorMessage)
             }
         } catch (error) {
@@ -67,14 +67,14 @@ const EditProfile = () => {
                             value={phoneNumber} type="text" id='phoneNumber' required
                         />
                         <div className='flex items-center justify-between'>
-                            <div className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-Flesh 
+                            <div className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-BloodOrange 
                             rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:purpleContrast 
                             dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-2">
                                 <Link to={"/user/"} >
                                     Back
                                 </Link>
                             </div>
-                            <div className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-Flesh 
+                            <div className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-BloodOrange 
                             rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:purpleContrast 
                             dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-2">
                                 <button
