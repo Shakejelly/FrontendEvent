@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import FRequestNoti from './FRequestNoti'
+import { useNavigate } from 'react-router-dom';
 
-const FriendBox = ({ friends, friendReq }) => {
+const FriendBox = ({ friends = [], friendReq = [] }) => {
+    const navigate = useNavigate();
+
+    const HandleViewFriendPage = (userId) => {
+        navigate('/friend', { state: { userId } })
+    }
+
     return (
         <>
             {/* friend container */}
@@ -13,7 +20,8 @@ const FriendBox = ({ friends, friendReq }) => {
 
                     {/* showing amount friends */}
                     <div className="flex items-center">
-                        <p className="text-x font-semibold text-gray-800 mr-1">{friends.length} Friends</p>
+                        <p className="text-x font-semibold text-gray-800 mr-1">{friends.length} Vänner</p>
+
                         {/* This div will contain incoming friendship requests. */}
                         {friendReq.length > 0 && (<FRequestNoti friendReq={friendReq} />)}
                     </div>
@@ -21,7 +29,7 @@ const FriendBox = ({ friends, friendReq }) => {
                     {/*Show all friends button*/}
                     {friends.length > 4 && (<div>
                         <Link to="/allfriends" state={friends} className='hover:text-white'>
-                            Show All
+                            Visa Alla
                         </Link>
                     </div>)}
                 </div>
@@ -32,7 +40,7 @@ const FriendBox = ({ friends, friendReq }) => {
                     {friends.slice(0, 4).map((friend, index) => (
 
                         // adding a link to be able to visit chosen friends profile.
-                        <Link to={`/user/${friend.id}`} key={index}>
+                        <div onClick={() => HandleViewFriendPage(friend.id)} key={index} className='cursor-pointer'>
 
                             {/* // a div (card) that will be created for every user-object  */}
                             <div className='bg-DarkPurple shadow-md hover:scale-105 rounded-lg p-5 w-[8rem] h-[8rem] mx-auto m-1'>
@@ -48,7 +56,7 @@ const FriendBox = ({ friends, friendReq }) => {
                                 </div>
                             </div>
 
-                        </Link>
+                        </div>
                     ))}
                 </div>
             </div>

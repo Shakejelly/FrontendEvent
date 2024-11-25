@@ -2,20 +2,22 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import FriendBox from '../components/FriendBox';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import FavoriteBox from '../components/FavoriteBox';
 import { jwtDecode } from 'jwt-decode';
 
-const UserPage = () => {
+const FriendPage = () => {
     const [user, setUser] = useState(null);
     const [friends, setFriends] = useState([]);
     const [friendReq, setFriendReq] = useState([])
     const navigate = useNavigate();
+    const location = useLocation();
+    const userId = location.state?.userId;
 
     const token = localStorage.getItem("token");
     const decodedToken = jwtDecode(token);
     const theId = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
-    const userId = decodedToken[theId]
+    const inloggedUserId = decodedToken[theId]
 
     useEffect(() => {
         const getUser = async () => {
@@ -38,10 +40,9 @@ const UserPage = () => {
         getUser();
     }, [userId]);
 
-    // function with 'navigate' for editProfile to send userId as prop
-    const HandleEditProfile = () => {
-        navigate('/editprofile', { state: { userId, userData: user } })
-    }
+    // checks if user has sent request, is friend or is not a friend
+    const isFriend = friends.some(friend => friend.id === inloggedUserId);
+    const hasSentRequest = friendReq.some(request => request.friendId === inloggedUserId);
 
     return (
         <>
@@ -57,19 +58,33 @@ const UserPage = () => {
                     }
                     <h5 className='text-center'>{user ? `${user.firstName} ${user.lastName}` : "Guest"}</h5>
 
-                    {/* edit profile section */}
+                    {/* friend status section */}
                     <div>
-                        <button
-                            onClick={HandleEditProfile}
-                            className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-black bg-Flesh 
-                            rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:purpleContrast 
-                            dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-1">
-                            Ändra profil
-                        </button>
+                        {isFriend ? (
+                            <button
+                                className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-black bg-green-400 
+                                rounded-lg hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-blue-300 dark:purpleContrast 
+                                dark:hover:bg-blue-700 dark:focus:ring-white-800 mb-1">
+                                Följer
+                            </button>
+                        ) : hasSentRequest ? (
+                            <button
+                                className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-gray-500 bg-gray-300 
+                                rounded-lg cursor-not-allowed mb-1">
+                                Förfrågan skickad
+                            </button>
+                        ) : (
+                            <button
+                                className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-black bg-Flesh 
+                                rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:purpleContrast 
+                                dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-1">
+                                Följ
+                            </button>
+                        )}
                     </div>
 
                     {/* friendsBox component */}
-                    <FriendBox friends={friends} friendReq={friendReq} />
+                    {/* <FriendBox friends={friends} /> */}
 
                     {/* favorite Box component */}
                     <FavoriteBox id={userId} />
@@ -80,5 +95,4 @@ const UserPage = () => {
     )
 }
 
-export default UserPage
-// const userId = "73f663e9-f16b-4503-988a-461318f3ebca";
+export default FriendPage

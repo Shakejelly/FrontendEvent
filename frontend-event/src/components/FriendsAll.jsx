@@ -1,19 +1,28 @@
 import React from 'react'
-import { useLocation, Link } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const FriendsAll = () => {
     // using 'uselocation' to fetch 'friends' from parent komponent
     const location = useLocation();
     const friends = location.state || [];
+    const navigate = useNavigate();
+
+    const HandleGoBack = () => {
+        if (location.pathname === "/user") {
+            navigate("/user")
+        } else {
+            navigate("/friend", { state: { userId: location.state.userId } })
+        }
+    }
 
     return (
         <>
             <div className='userPage min-h-screen bg-DarkPurple flex justify-center item-center'>
                 <div className="flex flex-col justify-top items-left mt-4 space-y-4 h-[90%]">
 
-                    <div><Link to={"/user/"} className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-Flesh 
+                    <div onClick={HandleGoBack} className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-Flesh 
                             rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:purpleContrast 
-                            dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-1">Back</Link></div>
+                            dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-1 cursor-pointer">Back</div>
 
                     {friends.length > 0 ? (friends.map((friend, index) => (
 
@@ -34,5 +43,3 @@ const FriendsAll = () => {
 }
 
 export default FriendsAll
-
-//border-2 border-yellow-500
