@@ -25,7 +25,10 @@ const LogOutButton = () => {
   }
 
   return (
-    <button onClick={handleLogout} className="logout-button">
+    <button
+      onClick={handleLogout}
+      className="px-4 py-2 text-sm font-medium text-white bg-Purple rounded-lg hover:bg-BrightOrange focus:ring-4 focus:outline-none focus:ring-BrightOrange dark:bg-Purple dark:hover:bg-BrightOrange dark:focus:ring-BrightOrange font-bebas"
+    >
       Logga ut
     </button>
   );

@@ -52,7 +52,6 @@ const Login = () => {
   };
 
   const handleRegisterView = () => setView("register");
-  const handleForgotPasswordView = () => navigate("/forgotPassword")
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-BrightOrange px-4 py-6 sm:px-6 lg:px-8">
@@ -103,13 +102,13 @@ const Login = () => {
               Registrera
             </button>
           </div>
-          {/* <button
+          <button
             type="button"
             onClick={handleGoogleLogin}
             className="w-full px-4 py-2 text-Purple border border-Purple rounded-lg hover:bg-Purple hover:text-white"
           >
             Logga in med Google
-          </button> */}
+          </button>
         </form>
       )}
 
