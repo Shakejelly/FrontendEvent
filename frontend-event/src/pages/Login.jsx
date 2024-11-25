@@ -24,19 +24,13 @@ const Login = () => {
         userName: username,
         password: password,
       });
-      console.log(response);
-
       const token = response.data.token;
       localStorage.setItem("token", token);
 
       const decodedToken = jwtDecode(token);
-      console.log(decodedToken);
-
       const roleKey =
         "http://schemas.microsoft.com/ws/2008/06/identity/claims/role";
       const userRole = decodedToken[roleKey];
-
-      console.log('userRole', userRole);
 
       if (userRole === "Admin") {
         navigate("/admin");
@@ -54,18 +48,19 @@ const Login = () => {
 
   const handleGoogleLogin = () => {
     window.location.href = `${apiBaseURL}google-login`;
+    navigate("/user/");
   };
 
   const handleRegisterView = () => setView("register");
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-DarkPurple">
+    <div className="flex items-center justify-center min-h-screen bg-BrightOrange px-4 py-6 sm:px-6 lg:px-8">
       {view === "login" && (
         <form
           onSubmit={handleSubmit}
-          className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg"
+          className="w-full max-w-md bg-white p-8 rounded-lg shadow-xl"
         >
-          <h2 className="mb-6 text-3xl font-bold text-center text-[#CE9F9F]">
+          <h2 className="mb-6 text-3xl font-bebas text-center text-BloodOrange">
             Login
           </h2>
           <div className="mb-4">
@@ -75,7 +70,7 @@ const Login = () => {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-DarkPurple"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-BloodOrange"
             />
           </div>
           <div className="mb-6">
@@ -85,23 +80,24 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-DarkPurple"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-BloodOrange"
             />
           </div>
           <button
             type="submit"
             disabled={isLoading}
-            className={`w-full py-2 mb-4 text-white rounded-lg ${isLoading ? "bg-gray-400" : "bg-[#CE9F9F] hover:bg-opacity-90"
-              }`}
+            className={`w-full py-2 mb-4 text-white rounded-lg ${
+              isLoading ? "bg-gray-400" : "bg-BloodOrange hover:bg-opacity-90"
+            }`}
           >
             {isLoading ? "Loggar in..." : "Login"}
           </button>
-          {error && <p className="mb-4 text-center text-[#CE9F9F]">{error}</p>}
+          {error && <p className="mb-4 text-center text-red-600">{error}</p>}
           <div className="flex justify-between mb-4 text-sm">
             <button
               type="button"
               onClick={handleRegisterView}
-              className="text-DarkPurple hover:underline"
+              className="text-Purple hover:underline"
             >
               Registrera
             </button>
@@ -109,7 +105,7 @@ const Login = () => {
           <button
             type="button"
             onClick={handleGoogleLogin}
-            className="w-full px-4 py-2 text-DarkPurple border border-DarkPurple rounded-lg hover:bg-DarkPurple hover:text-white"
+            className="w-full px-4 py-2 text-Purple border border-Purple rounded-lg hover:bg-Purple hover:text-white"
           >
             Logga in med Google
           </button>

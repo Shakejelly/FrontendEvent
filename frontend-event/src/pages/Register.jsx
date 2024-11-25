@@ -27,7 +27,6 @@ const Register = () => {
       });
       alert("Registrering lyckades!");
       navigate("/login");
-      console.log("Koden har lästs navigate");
     } catch (error) {
       setError(
         "Registreringen misslyckades. Email eller användarnamn upptaget."
@@ -38,82 +37,77 @@ const Register = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center min-h-screen bg-BrightOrange px-4 py-6 sm:px-6 lg:px-8">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg"
+        className="w-full max-w-md bg-white p-8 rounded-lg shadow-xl"
       >
-        <h2 className="mb-6 text-3xl font-bold text-center text-purple-700">
+        <h2 className="mb-6 text-3xl font-bebas text-center text-Purple">
           Registrera
         </h2>
-
         {error && (
           <div className="mb-4 text-sm text-center text-red-600">{error}</div>
         )}
-
         <div className="mb-4">
           <label className="block mb-2 text-sm font-medium text-gray-700">
             Användarnamn
           </label>
           <input
             type="text"
-            placeholder="Enter your username"
+            placeholder="Ange ditt användarnamn"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-Purple"
           />
         </div>
-
         <div className="mb-4">
           <label className="block mb-2 text-sm font-medium text-gray-700">
             Email
           </label>
           <input
             type="email"
-            placeholder="Enter your email"
+            placeholder="Ange din email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-Purple"
           />
         </div>
-
         <div className="mb-4">
           <label className="block mb-2 text-sm font-medium text-gray-700">
             Lösenord
           </label>
           <input
             type="password"
-            placeholder="Enter your password"
+            placeholder="Ange ditt lösenord"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-Purple"
           />
         </div>
-
         <div className="mb-6">
           <label className="block mb-2 text-sm font-medium text-gray-700">
-            Bekfräfta lösenord
+            Bekräfta lösenord
           </label>
           <input
             type="password"
-            placeholder="Confirm your password"
+            placeholder="Bekräfta ditt lösenord"
             value={confirmpassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-Purple"
           />
         </div>
-
         <button
           type="submit"
           disabled={isLoading}
-          className={`w-full py-2 text-white rounded-lg ${isLoading
-            ? "bg-gray-400 cursor-not-allowed"
-            : "bg-purple-700 hover:bg-purple-600 focus:ring-2 focus:ring-purple-500"
-            }`}
+          className={`w-full py-2 text-white rounded-lg ${
+            isLoading
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-Purple hover:bg-opacity-90"
+          }`}
         >
           {isLoading ? "Registrerar..." : "Register"}
         </button>
