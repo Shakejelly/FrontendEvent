@@ -12,6 +12,8 @@
     transition: width 0.3s ease;
     overflow: hidden;
     cursor: pointer;
+    transition: transform 1s ease;
+    transform: translateX(0);
 }
 .sidebar{
     display: flex;
@@ -51,5 +53,6 @@
 }
 
 .swipe-menu.open {
+    transform: translateX(0);
     width: 47%;
 }

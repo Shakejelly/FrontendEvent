@@ -7,8 +7,7 @@ import SettingsPage from './pages/settingPage';
 
 
 
-const buttonsConfig = [
-  {
+const buttonsConfig = [ {
     label: "Home",
     className: "bg-red-200 shadow-[inset_0_-1px_2px_rgba(0,0,0,0.6)] hover:bg-red-200 hover:shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] text-white",
   },
@@ -21,7 +20,6 @@ const buttonsConfig = [
     className: "bg-red-200 shadow-[inset_0_-1px_2px_rgba(0,0,0,0.6)] hover:bg-red-200 hover:shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] text-white",
   },
   
-   
 ];
 function MainLayout() {
   return (
